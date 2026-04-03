@@ -1,0 +1,80 @@
+# .geminiignore — Logus Tech
+# O agente não lerá estes arquivos durante as sessões.
+# Objetivo: reduzir consumo de tokens excluindo o que é irrelevante para o build.
+
+# Dependências
+node_modules/
+.pnp/
+vendor/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Build e output
+.next/
+dist/
+build/
+out/
+.output/
+*.min.js
+*.min.css
+*.map
+
+# Banco de dados local
+*.sqlite
+*.db
+*.db-journal
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+
+# Cache
+.cache/
+.parcel-cache/
+.turbo/
+.eslintcache
+*.tsbuildinfo
+
+# Ambiente e secrets
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Assets binários
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.webp
+*.woff
+*.woff2
+*.ttf
+*.eot
+*.mp4
+*.mp3
+*.pdf
+
+# Testes e coverage
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+
+# IDEs e sistema
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/extensions.json
+
+# Lockfiles
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+poetry.lock

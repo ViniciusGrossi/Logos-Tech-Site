@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Logos Tech — Visão Estratégica Central</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#050505;color:#e6e1d7}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0A0A0A}::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+.word{display:inline-block;opacity:0;margin-right:0.3em;transition:text-shadow 0.3s ease}
+@keyframes word-appear{0%{opacity:0;transform:translateY(30px) scale(0.8);filter:blur(10px)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+.word:hover {
+  color: #fff;
+  text-shadow: 0 0 20px rgba(249,115,22,0.8), 0 0 40px rgba(249,115,22,0.4);
+  transform: translateY(-2px) scale(1.05);
+  transition: all 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+  cursor: default;
+}
+.detail-dot{fill:rgba(249,115,22,0.4);opacity:0;animation:pulse-glow 2s ease-in-out infinite}
+@keyframes pulse-glow{0%,100%{opacity:0.1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+.corner-element{position:fixed;width:24px;height:24px;opacity:0;animation:word-appear 1s ease-out forwards;z-index:50}
+.floating-element{position:fixed;width:3px;height:3px;background:rgba(249,115,22,0.4);border-radius:50%;animation:float 8s ease-in-out infinite;animation-play-state:paused;z-index:5;pointer-events:none}
+@keyframes float{0%,100%{transform:translateY(0);opacity:0.2}50%{transform:translateY(-15px);opacity:0.8}}
+@keyframes fadeSlideIn{0%{opacity:0;transform:translateY(30px);filter:blur(8px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
+.anim{opacity:0;animation:fadeSlideIn 0.8s ease-out forwards}
+.grid-bg{background-image:linear-gradient(to right,rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,black 40%,transparent 70%)}
+.hub-glow{box-shadow:0 0 60px rgba(249,115,22,0.3),0 0 120px rgba(249,115,22,0.1);animation:hub-pulse 3s ease-in-out infinite}
+@keyframes hub-pulse{0%,100%{box-shadow:0 0 40px rgba(249,115,22,0.2),0 0 80px rgba(249,115,22,0.05)}50%{box-shadow:0 0 70px rgba(249,115,22,0.4),0 0 140px rgba(249,115,22,0.15)}}
+.beam-line{stroke:url(#beamGrad);stroke-width:2;stroke-dasharray:8 4;animation:dash-flow 2s linear infinite}
+@keyframes dash-flow{to{stroke-dashoffset:-24}}
+.module-card{transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);border:1px solid rgba(255,255,255,0.08)}
+.module-card:hover{transform:translateY(-8px) scale(1.02);border-color:rgba(249,115,22,0.4);box-shadow:0 20px 40px rgba(0,0,0,0.5),0 0 30px rgba(249,115,22,0.1)}
+.pipeline-step{position:relative;transition:all 0.3s ease}
+.pipeline-step:hover{transform:translateY(-4px)}
+.pipeline-step:hover .step-num{background:rgba(249,115,22,0.2);border-color:rgb(249,115,22);color:#F97316}
+.pipeline-arrow{color:rgba(255,255,255,0.15);animation:arrow-pulse 2s ease-in-out infinite}
+@keyframes arrow-pulse{0%,100%{opacity:0.15}50%{opacity:0.5}}
+.funnel-step{transition:all 0.3s ease;cursor:default}
+.funnel-step:hover{transform:scale(1.03);border-color:rgba(249,115,22,0.5)}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+.modal-overlay.active{opacity:1;pointer-events:auto}
+.modal-content{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.9);max-width:640px;width:90%;max-height:85vh;overflow-y:auto;background:#0A0A0A;border:1px solid rgba(255,255,255,0.1);z-index:201;opacity:0;pointer-events:none;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);padding:32px}
+.modal-content.active{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.modal-content::-webkit-scrollbar{width:4px}
+.modal-content::-webkit-scrollbar-thumb{background:#333;border-radius:2px}
+
+/* DROPDOWN */
+.dropdown-container {
+    background: #0A0A0A;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    min-height: 400px;
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(10px);
+}
+.dropdown-container.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* FILE CARDS */
+.file-card{transition:all 0.3s ease;border:1px solid rgba(255,255,255,0.06)}
+.file-card:hover{border-color:rgba(249,115,22,0.3);background:rgba(249,115,22,0.03)}
+.file-tag{font-family:'JetBrains Mono',monospace}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(249,115,22,0.3); border-radius: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(249,115,22,0.6); }
+</style></head><body class="min-h-screen overflow-x-hidden selection:bg-orange-500/30 text-white bg-[#050505] relative">
+<div class="fixed z-0 pointer-events-none inset-0"><div class="grid-bg absolute inset-0"></div><div id="mouse-glow" class="absolute w-[800px] h-[500px] bg-orange-900/10 blur-[120px] rounded-full pointer-events-none" style="transform: translate(-50%, -50%); transition: left 0.1s ease-out, top 0.1s ease-out;"></div></div>
+<svg class="fixed inset-0 w-full h-full pointer-events-none z-[1]" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(249,115,22,0.04)" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/><circle cx="20%" cy="20%" r="2" class="detail-dot" style="animation-delay:1s"/><circle cx="80%" cy="80%" r="2" class="detail-dot" style="animation-delay:2s"/></svg>
+<div class="floating-element" style="top:25%;left:15%"></div><div class="floating-element" style="top:60%;left:85%;animation-delay:1s"></div>
+<div class="corner-element top-8 left-8" style="animation-delay:1s"><div class="absolute top-0 left-0 w-2 h-2 bg-orange-500/30"></div></div>
+<div class="corner-element top-8 right-8" style="animation-delay:1.2s"><div class="absolute top-0 right-0 w-2 h-2 bg-orange-500/30"></div></div>
+
+<!-- MODAL SYSTEM -->
+<div id="modal-overlay" class="modal-overlay" onclick="closeModal()"></div>
+<div id="modal-box" class="modal-content">
+  <button onclick="closeModal()" class="absolute top-4 right-4 text-neutral-500 hover:text-white transition-colors text-lg">✕</button>
+  <div id="modal-body"></div>
+</div><nav class="fixed top-0 left-0 w-full z-[100] bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-4 flex justify-between items-center text-xs font-mono uppercase tracking-widest text-neutral-500">
+  <a href="#" class="text-white hover:text-orange-500 transition-colors flex items-center gap-3">
+    <img src="Logo-removebg-preview.png" alt="Logos Tech" class="w-10 h-10 object-contain"/>
+    <span class="text-sm font-sans font-semibold tracking-tight normal-case">Logos Tech</span>
+    <span class="text-[10px] text-orange-500/60 ml-1">Estratégia Central</span>
+  </a>
+  <div class="hidden md:flex gap-8">
+    <a href="#vision" class="hover:text-orange-500 transition-colors">Visão</a>
+    <a href="#modules" class="hover:text-orange-500 transition-colors">Módulos</a>
+    <a href="#workflow" class="hover:text-orange-500 transition-colors">Pipeline</a>
+    <a href="#files" class="hover:text-orange-500 transition-colors">Arquivos</a>
+    <a href="#cases" class="hover:text-orange-500 transition-colors">Cases</a>
+    <a href="#revenue" class="hover:text-orange-500 transition-colors">Revenue</a>
+    <a href="#roadmap" class="hover:text-orange-500 transition-colors">Roadmap</a>
+    <a href="#stack" class="hover:text-orange-500 transition-colors">Stack</a>
+  </div>
+</nav><section id="vision" class="pt-28 pb-16 px-6 lg:px-12 max-w-[90rem] mx-auto relative z-10">
+  <div class="text-center mb-6">
+    <h2 class="text-xs font-mono font-light uppercase tracking-[0.2em] text-neutral-400 mb-8">
+      <span class="word" data-delay="0">Logos</span><span class="word" data-delay="200">Tech</span><span class="word" data-delay="400">—</span><span class="word" data-delay="600">Visão</span><span class="word" data-delay="800">Estratégica</span><span class="word" data-delay="1000">Central</span>
+    </h2>
+  </div>
+  <h1 class="text-5xl lg:text-[6rem] leading-[0.9] uppercase text-white font-medium tracking-tighter text-center mb-8">
+    <span class="word" data-delay="1200">Transformação</span><br/>
+    <span class="text-neutral-600 word" data-delay="1400">Digi</span><span class="word" data-delay="1600">tal</span>
+    <span class="word" data-delay="1800">Modular</span>
+  </h1>
+  <p class="text-lg text-neutral-400 max-w-2xl mx-auto leading-relaxed font-light text-center anim" style="animation-delay:2s">
+    Ecossistema que integra <strong class="text-white">sistemas, automação, inteligência artificial e growth</strong> para resolver problemas complexos de PMEs e agentes públicos.
+  </p>
+  <div class="mt-10 flex justify-center anim" style="animation-delay:2.2s">
+    <div class="bg-orange-500/5 border border-orange-500/20 px-6 py-3 text-sm text-orange-300/80 font-light italic max-w-xl text-center">
+      "Entramos por uma dor específica e expandimos progressivamente nossa presença na operação do cliente."
+    </div>
+  </div>
+  <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 mt-16 anim" style="animation-delay:2.4s">
+    <div class="text-center group cursor-default"><span class="text-3xl font-light text-white group-hover:text-orange-500 transition-colors block tracking-tighter">4</span><span class="text-[10px] uppercase tracking-widest text-neutral-600">Módulos</span></div>
+    <div class="text-center group cursor-default"><span class="text-3xl font-light text-white group-hover:text-orange-500 transition-colors block tracking-tighter">3</span><span class="text-[10px] uppercase tracking-widest text-neutral-600">Segmentos</span></div>
+    <div class="text-center group cursor-default"><span class="text-3xl font-light text-white group-hover:text-orange-500 transition-colors block tracking-tighter">10</span><span class="text-[10px] uppercase tracking-widest text-neutral-600">Etapas Workflow</span></div>
+    <div class="text-center group cursor-default"><span class="text-3xl font-light text-white group-hover:text-orange-500 transition-colors block tracking-tighter">R$50K</span><span class="text-[10px] uppercase tracking-widest text-neutral-600">MRR Meta F3</span></div>
+    <div class="text-center group cursor-default"><span class="text-3xl font-light text-white group-hover:text-orange-500 transition-colors block tracking-tighter">50+</span><span class="text-[10px] uppercase tracking-widest text-neutral-600">Clientes Meta</span></div>
+  </div>
+</section>
+
+<section id="modules" class="py-24 px-6 lg:px-12 max-w-[90rem] mx-auto border-t border-white/5 relative z-20">
+  <div class="text-center mb-16 anim" style="animation-delay:0.1s">
+    <h2 class="text-4xl text-white font-medium mb-4">Ecossistema Modular</h2>
+    <p class="text-neutral-400 max-w-xl mx-auto">Clique em cada módulo para explorar detalhes</p>
+  </div>
+  <div class="relative max-w-4xl mx-auto anim" style="animation-delay:0.3s">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+      <div class="module-card bg-[#0A0A0A] p-6 text-center cursor-pointer" onclick="openModal('systems')">
+        <div class="w-12 h-12 mx-auto mb-4 border border-white/10 rounded-lg flex items-center justify-center text-orange-500"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div>
+        <h3 class="text-sm font-semibold text-white mb-1">Systems</h3>
+        <p class="text-[10px] text-neutral-500">Core Operacional</p>
+        <span class="text-[9px] text-orange-500/40 mt-2 block">clique para detalhes →</span>
+      </div>
+      <div class="module-card bg-[#0A0A0A] p-6 text-center cursor-pointer" onclick="openModal('automations')">
+        <div class="w-12 h-12 mx-auto mb-4 border border-white/10 rounded-lg flex items-center justify-center text-orange-500"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></div>
+        <h3 class="text-sm font-semibold text-white mb-1">Automations</h3>
+        <p class="text-[10px] text-neutral-500">IA & Workflows</p>
+        <span class="text-[9px] text-orange-500/40 mt-2 block">clique para detalhes →</span>
+      </div>
+      <div class="module-card bg-[#0A0A0A] p-6 text-center cursor-pointer" onclick="openModal('analytics')">
+        <div class="w-12 h-12 mx-auto mb-4 border border-white/10 rounded-lg flex items-center justify-center text-orange-500"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+        <h3 class="text-sm font-semibold text-white mb-1">Analytics</h3>
+        <p class="text-[10px] text-neutral-500">Dados & Inteligência</p>
+        <span class="text-[9px] text-orange-500/40 mt-2 block">clique para detalhes →</span>
+      </div>
+      <div class="module-card bg-[#0A0A0A] p-6 text-center cursor-pointer" onclick="openModal('growth')">
+        <div class="w-12 h-12 mx-auto mb-4 border border-white/10 rounded-lg flex items-center justify-center text-orange-500"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2z"/></svg></div>
+        <h3 class="text-sm font-semibold text-white mb-1">Growth</h3>
+        <p class="text-[10px] text-neutral-500">Marketing & Expansão</p>
+        <span class="text-[9px] text-orange-500/40 mt-2 block">clique para detalhes →</span>
+      </div>
+    </div>
+    <svg class="w-full h-16 -mt-12 mb-4" viewBox="0 0 800 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <defs><linearGradient id="beamGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="50%" stop-color="rgba(249,115,22,0.6)"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs>
+      <line x1="100" y1="5" x2="400" y2="55" class="beam-line"/><line x1="300" y1="5" x2="400" y2="55" class="beam-line" style="animation-delay:0.5s"/><line x1="500" y1="5" x2="400" y2="55" class="beam-line" style="animation-delay:1s"/><line x1="700" y1="5" x2="400" y2="55" class="beam-line" style="animation-delay:1.5s"/>
+    </svg>
+    <div class="flex justify-center mb-4"><div class="hub-glow w-24 h-24 rounded-full bg-[#0A0A0A] border border-orange-500/30 flex items-center justify-center"><img src="Logo-removebg-preview.png" alt="Logos Tech" class="w-14 h-14 object-contain"/></div></div>
+    <div class="text-center mb-4"><span class="text-sm font-semibold text-white block">Logos Tech Engine</span><span class="text-[10px] uppercase tracking-widest text-orange-500/60">Orchestration</span></div>
+    <svg class="w-full h-16 mb-4" viewBox="0 0 800 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <line x1="400" y1="5" x2="200" y2="55" class="beam-line" style="animation-delay:2s"/><line x1="400" y1="5" x2="400" y2="55" class="beam-line" style="animation-delay:2.3s"/><line x1="400" y1="5" x2="600" y2="55" class="beam-line" style="animation-delay:2.6s"/>
+    </svg>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="module-card bg-[#0A0A0A] p-6 cursor-pointer" onclick="openModal('pmes')">
+        <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 border border-white/10 rounded-lg flex items-center justify-center text-orange-500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/></svg></div><h3 class="text-sm font-semibold text-white">PMEs</h3></div>
+        <p class="text-[11px] text-neutral-500">Oficinas, clínicas, serviços. <span class="text-orange-500/40">Ver detalhes →</span></p>
+      </div>
+      <div class="module-card bg-[#0A0A0A] p-6 cursor-pointer" onclick="openModal('publico')">
+        <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 border border-white/10 rounded-lg flex items-center justify-center text-orange-500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3 class="text-sm font-semibold text-white">Setor Público</h3></div>
+        <p class="text-[11px] text-neutral-500">Vereadores, deputados, assessores. <span class="text-orange-500/40">Ver detalhes →</span></p>
+      </div>
+      <div class="module-card bg-[#0A0A0A] p-6 cursor-pointer" onclick="openModal('startups')">
+        <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 border border-white/10 rounded-lg flex items-center justify-center text-orange-500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2z"/></svg></div><h3 class="text-sm font-semibold text-white">Startups</h3></div>
+        <p class="text-[11px] text-neutral-500">Escala com dados e automação. <span class="text-orange-500/40">Ver detalhes →</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="workflow" class="py-24 px-6 lg:px-12 max-w-[90rem] mx-auto border-t border-white/5 relative z-20">
+  <div class="text-center mb-16 anim" style="animation-delay:0.1s">
+    <h2 class="text-4xl text-white font-medium mb-4">Pipeline de Execução</h2>
+    <p class="text-neutral-400 max-w-xl mx-auto">10 etapas padronizadas. Clique em cada passo para ver prompts reais e saídas.</p>
+  </div>
+  
+  <div class="flex flex-wrap items-center justify-center gap-2 lg:gap-1 mb-12 anim" style="animation-delay:0.3s">
+    <div class="pipeline-step flex items-center gap-1"><div class="flex flex-col items-center p-3 lg:p-4 bg-[#0A0A0A] border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer min-w-[95px] dropdown-toggle border-orange-500/30" onclick="showDrop(1, this)"><div class="step-num w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-[10px] font-semibold text-neutral-500 mb-2 transition-all">1</div><span class="text-[10px] font-semibold text-white text-center">IDEIA</span><span class="text-[9px] text-neutral-600 text-center mt-1">Claude</span></div><span class="pipeline-arrow text-lg">→</span></div>
+    <div class="pipeline-step flex items-center gap-1"><div class="flex flex-col items-center p-3 lg:p-4 bg-[#0A0A0A] border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer min-w-[95px] dropdown-toggle" onclick="showDrop(2, this)"><div class="step-num w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-[10px] font-semibold text-neutral-500 mb-2 transition-all">2</div><span class="text-[10px] font-semibold text-white text-center">PRD</span><span class="text-[9px] text-neutral-600 text-center mt-1">Claude</span></div><span class="pipeline-arrow text-lg">→</span></div>
+    <div class="pipeline-step flex items-center gap-1"><div class="flex flex-col items-center p-3 lg:p-4 bg-[#0A0A0A] border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer min-w-[95px] dropdown-toggle" onclick="showDrop(3, this)"><div class="step-num w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-[10px] font-semibold text-neutral-500 mb-2 transition-all">3</div><span class="text-[10px] font-semibold text-white text-center">ARQUITETURA</span><span class="text-[9px] text-neutral-600 text-center mt-1">Claude→AG</span></div><span class="pipeline-arrow text-lg">→</span></div>
+    <div class="pipeline-step flex items-center gap-1"><div class="flex flex-col items-center p-3 lg:p-4 bg-[#0A0A0A] border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer min-w-[95px] dropdown-toggle" onclick="showDrop(4, this)"><div class="step-num w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-[10px] font-semibold text-neutral-500 mb-2 transition-all">4</div><span class="text-[10px] font-semibold text-white text-center">DESIGN</span><span class="text-[9px] text-neutral-600 text-center mt-1">AG ui-ux</span></div><span class="pipeline-arrow text-lg">→</span></div>
+    <div class="pipeline-step flex items-center gap-1"><div class="flex flex-col items-center p-3 lg:p-4 bg-[#0A0A0A] border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer min-w-[95px] dropdown-toggle" onclick="showDrop(5, this)"><div class="step-num w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-[10px] font-semibold text-neutral-500 mb-2 transition-all">5</div><span class="text-[10px] font-semibold text-white text-center">TASKS</span><span class="text-[9px] text-neutral-600 text-center mt-1">AG plan</span></div><span class="pipeline-arrow text-lg">→</span></div>
+    <div class="pipeline-step flex items-center gap-1"><div class="flex flex-col items-center p-3 lg:p-4 bg-[#0A0A0A] border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer min-w-[95px] dropdown-toggle" onclick="showDrop(6, this)"><div class="step-num w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-[10px] font-semibold text-neutral-500 mb-2 transition-all">6</div><span class="text-[10px] font-semibold text-white text-center">BUILD</span><span class="text-[9px] text-neutral-600 text-center mt-1">AG code</span></div><span class="pipeline-arrow text-lg">→</span></div>
+    <div class="pipeline-step flex items-center gap-1"><div class="flex flex-col items-center p-3 lg:p-4 bg-[#0A0A0A] border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer min-w-[95px] dropdown-toggle" onclick="showDrop(7, this)"><div class="step-num w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-[10px] font-semibold text-neutral-500 mb-2 transition-all">7</div><span class="text-[10px] font-semibold text-white text-center">VALIDATE</span><span class="text-[9px] text-neutral-600 text-center mt-1">AG test</span></div><span class="pipeline-arrow text-lg">→</span></div>
+    <div class="pipeline-step flex items-center gap-1"><div class="flex flex-col items-center p-3 lg:p-4 bg-[#0A0A0A] border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer min-w-[95px] dropdown-toggle" onclick="showDrop(8, this)"><div class="step-num w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-[10px] font-semibold text-neutral-500 mb-2 transition-all">8</div><span class="text-[10px] font-semibold text-white text-center">DOCUMENT</span><span class="text-[9px] text-neutral-600 text-center mt-1">AG docs</span></div><span class="pipeline-arrow text-lg">→</span></div>
+    <div class="pipeline-step flex items-center gap-1"><div class="flex flex-col items-center p-3 lg:p-4 bg-[#0A0A0A] border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer min-w-[95px] dropdown-toggle" onclick="showDrop(9, this)"><div class="step-num w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-[10px] font-semibold text-neutral-500 mb-2 transition-all">9</div><span class="text-[10px] font-semibold text-white text-center">RAG</span><span class="text-[9px] text-neutral-600 text-center mt-1">AG+API</span></div><span class="pipeline-arrow text-lg">→</span></div>
+    <div class="pipeline-step"><div class="flex flex-col items-center p-3 lg:p-4 bg-[#0A0A0A] border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer min-w-[95px] dropdown-toggle" onclick="showDrop(10, this)"><div class="step-num w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-[10px] font-semibold text-neutral-500 mb-2 transition-all">10</div><span class="text-[10px] font-semibold text-white text-center">DEPLOY</span><span class="text-[9px] text-neutral-600 text-center mt-1">AG devops</span></div></div>
+  </div>
+
+  <!-- SINGLE DROPDOWN MASTER CONTAINER -->
+  <div id="master-dropdown" class="dropdown-container active p-8 lg:p-12 w-full max-w-5xl mx-auto shadow-2xl relative overflow-hidden">
+    <!-- Dynamic content goes here -->
+  </div>
+
+  <!-- Tool Split -->
+  <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 anim max-w-5xl mx-auto" style="animation-delay:0.5s">
+    <div class="p-8 bg-[#0A0A0A] border border-white/5 rounded-lg"><div class="flex items-center gap-4 mb-4"><div class="w-10 h-10 rounded-full bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 text-lg font-bold">💬</div><h3 class="text-base font-semibold text-white">Claude / ChatGPT</h3></div><p class="text-xs text-neutral-400 leading-relaxed mb-4">Mestre de Cerimônias: Pensar, Decidir e Escrever Docs Estratégicos. Jamais dar a ele a tarefa de escalar código gigantesco.</p><div class="flex flex-wrap gap-2"><span class="text-[11px] bg-white/5 border border-white/10 px-3 py-1 rounded text-neutral-300">Ideação</span><span class="text-[11px] bg-white/5 border border-white/10 px-3 py-1 rounded text-neutral-300">PRD</span><span class="text-[11px] bg-white/5 border border-white/10 px-3 py-1 rounded text-neutral-300">Arquitetura</span><span class="text-[11px] bg-white/5 border border-white/10 px-3 py-1 rounded text-neutral-300">Design System</span></div></div>
+    <div class="p-8 bg-[#0A0A0A] border border-white/5 rounded-lg"><div class="flex items-center gap-4 mb-4"><div class="w-10 h-10 rounded-full bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 text-lg font-bold">🤖</div><h3 class="text-base font-semibold text-white">Antigravity</h3></div><p class="text-xs text-neutral-400 leading-relaxed mb-4">Peão de Obras Especializado: Executar — gerar código estruturado, testar exaustivamente, debugar a fundo e fazer deploy.</p><div class="flex flex-wrap gap-2"><span class="text-[11px] bg-white/5 border border-white/10 px-3 py-1 rounded text-neutral-300">Tasks</span><span class="text-[11px] bg-white/5 border border-white/10 px-3 py-1 rounded text-neutral-300">Build</span><span class="text-[11px] bg-white/5 border border-white/10 px-3 py-1 rounded text-neutral-300">Validate</span><span class="text-[11px] bg-white/5 border border-white/10 px-3 py-1 rounded text-neutral-300">Deploy</span><span class="text-[11px] bg-white/5 border border-white/10 px-3 py-1 rounded text-neutral-300">RAG Config</span></div></div>
+  </div>
+</section>
+
+<!-- DAILY PROMPTS SOP -->
+<section id="daily-prompts" class="py-24 px-6 lg:px-12 max-w-[90rem] mx-auto border-t border-white/5 relative z-20">
+  <div class="text-center mb-16 anim" style="animation-delay:0.1s">
+    <div class="inline-flex items-center justify-center gap-2 border border-orange-500/30 bg-orange-500/5 px-4 py-1.5 rounded-full mb-4">
+      <div class="w-2 h-2 rounded-full bg-orange-500 animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]"></div>
+      <span class="text-[10px] uppercase font-mono tracking-widest text-orange-400">Standard Operating Procedure</span>
+    </div>
+    <h2 class="text-4xl text-white font-medium mb-4">Prompts Diários Obrigatórios</h2>
+    <p class="text-neutral-400 max-w-2xl mx-auto">Para manter a sanidade do projeto e forçar a IA a agir como engenharia de software e não chat amador, use esses comandos exatos no seu dia a dia.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto anim" style="animation-delay:0.2s">
+    <!-- Prompt 1 -->
+    <div class="bg-[#0A0A0A] border border-white/5 p-6 rounded relative overflow-hidden group hover:border-orange-500/30 transition-all">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-sm font-semibold text-white">🌅 Início de Sessão</h3>
+        <span class="text-[10px] bg-white/5 text-neutral-400 px-2 py-1 rounded font-mono border border-white/10">USO DIÁRIO</span>
+      </div>
+      <p class="text-xs text-neutral-500 mb-4 h-8">Força a IA a recuperar o fio da meada lendo a memória persistente.</p>
+      <div class="bg-black/50 p-4 rounded border-l-2 border-orange-500/50">
+        <pre class="text-[11px] font-mono text-neutral-300 whitespace-pre-wrap">Leia o STATE-PROJECT.md e me diga em uma linha onde paramos e qual é a próxima task.</pre>
+      </div>
+    </div>
+
+    <!-- Prompt 2 -->
+    <div class="bg-[#0A0A0A] border border-white/5 p-6 rounded relative overflow-hidden group hover:border-orange-500/30 transition-all">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-sm font-semibold text-white">🌃 Fim de Sessão</h3>
+        <span class="text-[10px] bg-white/5 text-neutral-400 px-2 py-1 rounded font-mono border border-white/10">USO DIÁRIO</span>
+      </div>
+      <p class="text-xs text-neutral-500 mb-4 h-8">Congela a evolução do código antes de fechar o editor.</p>
+      <div class="bg-black/50 p-4 rounded border-l-2 border-orange-500/50">
+        <pre class="text-[11px] font-mono text-neutral-300 whitespace-pre-wrap">Atualize o STATE-PROJECT.md com o que foi feito hoje e qual é o próximo passo exato.</pre>
+      </div>
+    </div>
+
+    <!-- Prompt 3 -->
+    <div class="bg-[#0A0A0A] border border-white/5 p-6 rounded relative overflow-hidden group hover:border-red-500/30 transition-all">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-sm font-semibold text-white">🚧 Quebra de Padrão (Correção)</h3>
+        <span class="text-[10px] bg-red-500/10 text-red-400 px-2 py-1 rounded font-mono border border-red-500/20">QUANDO ERRAR</span>
+      </div>
+      <p class="text-xs text-neutral-500 mb-4 h-8">Castigo imediato quando a IA tenta misturar Controller com Service.</p>
+      <div class="bg-black/50 p-4 rounded border-l-2 border-red-500/50">
+        <pre class="text-[11px] font-mono text-neutral-300 whitespace-pre-wrap">Isso não segue o padrão do GLOBAL-RULES.md. Refaça respeitando a separação Controller → Service → Repository.</pre>
+      </div>
+    </div>
+
+    <!-- Prompt 4 -->
+    <div class="bg-[#0A0A0A] border border-white/5 p-6 rounded relative overflow-hidden group hover:border-blue-500/30 transition-all">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-sm font-semibold text-white">🧭 Localização de Documentação</h3>
+        <span class="text-[10px] bg-blue-500/10 text-blue-400 px-2 py-1 rounded font-mono border border-blue-500/20">DÚVIDA</span>
+      </div>
+      <p class="text-xs text-neutral-500 mb-4 h-8">Delega ao Agente a responsabilidade de saber a qual Markdown o assunto pertence.</p>
+      <div class="bg-black/50 p-4 rounded border-l-2 border-blue-500/50">
+        <pre class="text-[11px] font-mono text-neutral-300 whitespace-pre-wrap">Quero documentar [X]. Com base nos docs do projeto, em qual arquivo isso deve ser registrado e com qual formato?</pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CENTRAL FILES + CLI -->
+<section id="files" class="py-24 px-6 lg:px-12 max-w-[90rem] mx-auto border-t border-white/5 relative z-20">
+  <div class="text-center mb-6 anim" style="animation-delay:0.1s">
+    <h2 class="text-4xl text-white font-medium mb-4">Arquivos Centrais do Projeto</h2>
+    <p class="text-neutral-400 max-w-2xl mx-auto">Cada projeto Logos Tech segue uma estrutura padronizada de documentos. Todos são gerados automaticamente pelo CLI.</p>
+  </div>
+
+  <!-- CLI Banner -->
+  <div class="max-w-3xl mx-auto mb-12 anim" style="animation-delay:0.2s">
+    <div class="bg-[#0A0A0A] border border-orange-500/20 p-6">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-10 h-10 bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 font-mono text-sm font-bold">$</div>
+        <div><h3 class="text-sm font-semibold text-white">Logos CLI — Project Scaffolder</h3><p class="text-[10px] text-neutral-500">Gera a estrutura completa com um único comando</p></div>
+      </div>
+      <div class="bg-black/60 p-4 font-mono text-[12px] border-l-2 border-orange-500/40">
+        <span class="text-neutral-500">$</span> <span class="text-orange-400">logos init</span> <span class="text-white">meu-projeto</span><br/>
+        <span class="text-green-400/80 mt-1 block">✅ Projeto 'meu-projeto' criado com sucesso!</span>
+      </div>
+      <div class="mt-4 grid grid-cols-3 gap-3 text-[10px]">
+        <div class="text-neutral-500"><span class="text-white font-semibold block mb-1">7 arquivos raiz</span>PRD.md, ARCHITECTURE.md, GEMINI.md, README.md, STATE-PROJECT.md, .geminiignore, .env.example</div>
+        <div class="text-neutral-500"><span class="text-white font-semibold block mb-1">7 docs/</span>design-system.md, features.md, flows.md, faq.md, metrics.md, data-lineage.md, glossary.md</div>
+        <div class="text-neutral-500"><span class="text-white font-semibold block mb-1">Pastas estruturadas</span>backend/src/ (6 dirs), frontend/src/ (4 dirs), supabase/migrations/</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- File Cards Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto anim" style="animation-delay:0.3s">
+    <div class="file-card bg-[#0A0A0A] p-5 cursor-pointer" onclick="openModal('file_prd')">
+      <div class="flex items-center gap-3 mb-2"><span class="file-tag text-[10px] bg-orange-500/10 text-orange-400 px-2 py-0.5">ESTRATÉGIA</span></div>
+      <h3 class="text-sm font-semibold text-white mb-1">PRD.md</h3>
+      <p class="text-[11px] text-neutral-500">Produto, problema, solução, público, MVP e métricas. O ponto de partida de todo projeto.</p>
+    </div>
+    <div class="file-card bg-[#0A0A0A] p-5 cursor-pointer" onclick="openModal('file_arch')">
+      <div class="flex items-center gap-3 mb-2"><span class="file-tag text-[10px] bg-blue-500/10 text-blue-400 px-2 py-0.5">TÉCNICO</span></div>
+      <h3 class="text-sm font-semibold text-white mb-1">ARCHITECTURE.md</h3>
+      <p class="text-[11px] text-neutral-500">Stack, camadas, banco, fluxos críticos, integrações e variáveis de ambiente.</p>
+    </div>
+    <div class="file-card bg-[#0A0A0A] p-5 cursor-pointer" onclick="openModal('file_workflow')">
+      <div class="flex items-center gap-3 mb-2"><span class="file-tag text-[10px] bg-green-500/10 text-green-400 px-2 py-0.5">PROCESSO</span></div>
+      <h3 class="text-sm font-semibold text-white mb-1">Workflow.md</h3>
+      <p class="text-[11px] text-neutral-500">O guia central de execução. Define as 10 etapas, ferramentas e saídas de cada fase.</p>
+    </div>
+    <div class="file-card bg-[#0A0A0A] p-5 cursor-pointer" onclick="openModal('file_gemini')">
+      <div class="flex items-center gap-3 mb-2"><span class="file-tag text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5">AGENTE</span></div>
+      <h3 class="text-sm font-semibold text-white mb-1">GEMINI.md</h3>
+      <p class="text-[11px] text-neutral-500">Contexto permanente do agente IA. Stack, regras, arquitetura, o que não fazer.</p>
+    </div>
+    <div class="file-card bg-[#0A0A0A] p-5 cursor-pointer" onclick="openModal('file_guia')">
+      <div class="flex items-center gap-3 mb-2"><span class="file-tag text-[10px] bg-cyan-500/10 text-cyan-400 px-2 py-0.5">GUIA</span></div>
+      <h3 class="text-sm font-semibold text-white mb-1">GUIA-INICIO-PROJETO.md</h3>
+      <p class="text-[11px] text-neutral-500">Passo a passo prático com prompts reais para cada etapa. Exemplo: Logos Polis.</p>
+    </div>
+    <div class="file-card bg-[#0A0A0A] p-5 cursor-pointer" onclick="openModal('file_state')">
+      <div class="flex items-center gap-3 mb-2"><span class="file-tag text-[10px] bg-rose-500/10 text-rose-400 px-2 py-0.5">STATUS</span></div>
+      <h3 class="text-sm font-semibold text-white mb-1">STATE-PROJECT.md</h3>
+      <p class="text-[11px] text-neutral-500">Fase atual, o que já foi feito, em andamento e próximo passo. Atualizado a cada sessão.</p>
+    </div>
+  </div>
+
+  <!-- docs/ sub-files -->
+  <div class="max-w-5xl mx-auto mt-8 anim" style="animation-delay:0.4s">
+    <h3 class="text-xs font-mono uppercase tracking-widest text-neutral-600 mb-4 text-center">docs/ — Documentação para o RAG</h3>
+    <div class="grid grid-cols-2 lg:grid-cols-7 gap-2">
+      <div class="file-card bg-[#080808] p-3 text-center"><span class="text-[10px] text-neutral-400 font-mono">metrics.md</span><br/><span class="text-[9px] text-neutral-600">KPIs</span></div>
+      <div class="file-card bg-[#080808] p-3 text-center"><span class="text-[10px] text-neutral-400 font-mono">data-lineage.md</span><br/><span class="text-[9px] text-neutral-600">Origem dados</span></div>
+      <div class="file-card bg-[#080808] p-3 text-center"><span class="text-[10px] text-neutral-400 font-mono">glossary.md</span><br/><span class="text-[9px] text-neutral-600">Termos</span></div>
+      <div class="file-card bg-[#080808] p-3 text-center"><span class="text-[10px] text-neutral-400 font-mono">features.md</span><br/><span class="text-[9px] text-neutral-600">Funções</span></div>
+      <div class="file-card bg-[#080808] p-3 text-center"><span class="text-[10px] text-neutral-400 font-mono">flows.md</span><br/><span class="text-[9px] text-neutral-600">Fluxos</span></div>
+      <div class="file-card bg-[#080808] p-3 text-center"><span class="text-[10px] text-neutral-400 font-mono">faq.md</span><br/><span class="text-[9px] text-neutral-600">Perguntas</span></div>
+      <div class="file-card bg-[#080808] p-3 text-center"><span class="text-[10px] text-neutral-400 font-mono">design-system.md</span><br/><span class="text-[9px] text-neutral-600">Visual</span></div>
+    </div>
+  </div>
+</section><section id="cases" class="py-24 px-6 lg:px-12 max-w-[90rem] mx-auto border-t border-white/5 relative z-20">
+  <div class="text-center mb-16 anim" style="animation-delay:0.1s">
+    <h2 class="text-4xl text-white font-medium mb-4">Casos de Uso Validados</h2>
+    <p class="text-neutral-400 max-w-xl mx-auto">Aplicações práticas do ecossistema Logos Tech</p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 anim" style="animation-delay:0.3s">
+    <div class="bg-[#0A0A0A] border border-white/5 p-8 transition-colors hover:border-orange-500/30">
+      <div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 border border-orange-500/20 bg-orange-500/10 rounded-lg flex items-center justify-center text-orange-500 text-lg">🏛️</div><h3 class="text-xl font-medium text-white">Logos Polis</h3></div>
+      <p class="text-sm text-neutral-400 mb-6 leading-relaxed">Mandato inteligente. Inteligência política, CRM de eleitores e automação de gabinete para vereadores e deputados.</p>
+      <div class="flex flex-wrap gap-2 pt-6 border-t border-white/5"><span class="text-[10px] uppercase tracking-widest bg-[#111] px-3 py-1 text-neutral-500 border border-white/5">Systems</span><span class="text-[10px] uppercase tracking-widest bg-[#111] px-3 py-1 text-neutral-500 border border-white/5">Analytics</span></div>
+    </div>
+    <div class="bg-[#0A0A0A] border border-white/5 p-8 transition-colors hover:border-orange-500/30">
+      <div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 border border-orange-500/20 bg-orange-500/10 rounded-lg flex items-center justify-center text-orange-500 text-lg">📊</div><h3 class="text-xl font-medium text-white">RDO (Win Analytics)</h3></div>
+      <p class="text-sm text-neutral-400 mb-6 leading-relaxed">Relatório Diário de Obra automatizado via foto do WhatsApp usando AI Vision e dashboard em tempo real.</p>
+      <div class="flex flex-wrap gap-2 pt-6 border-t border-white/5"><span class="text-[10px] uppercase tracking-widest bg-[#111] px-3 py-1 text-neutral-500 border border-white/5">Automations</span><span class="text-[10px] uppercase tracking-widest bg-[#111] px-3 py-1 text-neutral-500 border border-white/5">Analytics</span></div>
+    </div>
+    <div class="bg-[#0A0A0A] border border-white/5 p-8 transition-colors hover:border-orange-500/30">
+      <div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 border border-orange-500/20 bg-orange-500/10 rounded-lg flex items-center justify-center text-orange-500 text-lg">⚖️</div><h3 class="text-xl font-medium text-white">Juris (Win)</h3></div>
+      <p class="text-sm text-neutral-400 mb-6 leading-relaxed">CRM Jurídico inteligente. Agendamento integrado e workflow automatizado de captura de processos.</p>
+      <div class="flex flex-wrap gap-2 pt-6 border-t border-white/5"><span class="text-[10px] uppercase tracking-widest bg-[#111] px-3 py-1 text-neutral-500 border border-white/5">Systems</span><span class="text-[10px] uppercase tracking-widest bg-[#111] px-3 py-1 text-neutral-500 border border-white/5">Automations</span></div>
+    </div>
+    <div class="bg-[#0A0A0A] border border-white/5 p-8 transition-colors hover:border-orange-500/30">
+      <div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 border border-orange-500/20 bg-orange-500/10 rounded-lg flex items-center justify-center text-orange-500 text-lg">🚗</div><h3 class="text-xl font-medium text-white">Auto Service</h3></div>
+      <p class="text-sm text-neutral-400 mb-6 leading-relaxed">ERP enxuto para oficinas mecânicas. Controle de OS, IA para orçamentos e aprovação via WhatsApp.</p>
+      <div class="flex flex-wrap gap-2 pt-6 border-t border-white/5"><span class="text-[10px] uppercase tracking-widest bg-[#111] px-3 py-1 text-neutral-500 border border-white/5">Systems</span><span class="text-[10px] uppercase tracking-widest bg-[#111] px-3 py-1 text-neutral-500 border border-white/5">Growth</span></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="revenue" class="py-24 px-6 lg:px-12 max-w-[90rem] mx-auto border-t border-white/5 relative z-20">
+  <div class="text-center mb-16 anim" style="animation-delay:0.1s">
+    <h2 class="text-4xl text-white font-medium mb-4">Funil de Tração & Receita</h2>
+    <p class="text-neutral-400 max-w-xl mx-auto text-sm">Land & Expand: Como conquistamos clientes com iscas de alto valor e expandimos para o core do negócio.</p>
+  </div>
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-16 items-start">
+    <div class="space-y-6 anim" style="animation-delay:0.3s">
+      <h3 class="text-sm font-mono uppercase tracking-widest text-orange-500 mb-8 font-semibold flex items-center gap-3"><span class="w-8 h-px bg-orange-500/50"></span> Produtos de Receita (Streams) <span class="w-8 h-px bg-orange-500/50"></span></h3>
+      
+      <div class="group p-6 border border-white/5 bg-[#0A0A0A] hover:bg-orange-500/5 hover:border-orange-500/30 transition-all rounded-lg flex gap-6 mt-4">
+        <div class="text-orange-500 text-3xl font-light opacity-50 group-hover:opacity-100 transition-opacity">01</div>
+        <div>
+          <h4 class="text-lg font-medium text-white mb-2">SaaS Micro-Nicho (Low Ticket)</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed mb-3">R$100 a R$300/mês. Volume e retenção. Entregamos a cura para uma dor super específica, estabelecendo o primeiro contato tecnológico.</p>
+          <span class="text-[10px] text-orange-400/80 bg-orange-500/10 px-2 py-1 rounded">Logos Polis, Auto Service ERP Básicos</span>
+        </div>
+      </div>
+
+      <div class="group p-6 border border-white/5 bg-[#0A0A0A] hover:bg-orange-500/5 hover:border-orange-500/30 transition-all rounded-lg flex gap-6">
+        <div class="text-orange-500 text-3xl font-light opacity-50 group-hover:opacity-100 transition-opacity">02</div>
+        <div>
+          <h4 class="text-lg font-medium text-white mb-2">Projetos Fechados (Mid-High Ticket)</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed mb-3">R$5K a R$20K. Setups de automação n8n, dashboards customizados e integrações Legacy para sanar gargalos processuais urgentes.</p>
+          <span class="text-[10px] text-orange-400/80 bg-orange-500/10 px-2 py-1 rounded">RDO Obras, Fluxos Comerciais Zap</span>
+        </div>
+      </div>
+
+      <div class="group p-6 border border-white/5 bg-[#0A0A0A] hover:bg-orange-500/5 hover:border-orange-500/30 transition-all rounded-lg flex gap-6">
+        <div class="text-orange-500 text-3xl font-light opacity-50 group-hover:opacity-100 transition-opacity">03</div>
+        <div>
+          <h4 class="text-lg font-medium text-white mb-2">Premium Tech Retainer (High Ticket)</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed mb-3">R$5K+ mensais. Assumimos como Tech Partners. Engenharia contínua de IA, Data Science e Squad sob demanda para empresas estabilizadas.</p>
+          <span class="text-[10px] text-orange-400/80 bg-orange-500/10 px-2 py-1 rounded">Desenvolvimento Custom, MLOps, CTO as a Service</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="anim" style="animation-delay:0.5s">
+      <h3 class="text-sm font-mono uppercase tracking-widest text-orange-500 mb-8 font-semibold flex items-center justify-center xl:justify-start gap-3"><span class="w-8 h-px bg-orange-500/50"></span> Estratégia do Funil "Land & Expand" <span class="w-8 h-px bg-orange-500/50"></span></h3>
+      <div class="flex flex-col items-center gap-3 relative py-4">
+        <!-- linha guia central -->
+        <div class="absolute top-0 bottom-0 left-1/2 w-0.5 custom-dash bg-repeat-y opacity-30 -translate-x-1/2 z-0" style="background-image: linear-gradient(to bottom, #F97316 50%, transparent 50%); background-size: 2px 10px;"></div>
+        
+        <div class="funnel-step z-10 w-full md:w-[28rem] bg-[#0A0A0A] border border-white/10 p-5 rounded-lg flex items-center gap-4 relative overflow-hidden group">
+          <div class="absolute left-0 top-0 bottom-0 w-1 bg-neutral-600"></div>
+          <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center text-xl">🪝</div>
+          <div class="text-left"><span class="block text-[10px] font-mono font-bold text-neutral-400 tracking-wider">01. TOFU (Topo) - LAND</span><h4 class="text-white text-base font-semibold">Isca de Baixo Atrito</h4><p class="text-[11px] text-neutral-500 mt-1">Chatbot de WhatsApp imediato. Dor latente curada sem setup.</p></div>
+        </div>
+        
+        <div class="funnel-step z-10 w-full md:w-[26rem] bg-[#0A0A0A] border border-white/10 p-5 rounded-lg flex items-center gap-4 relative overflow-hidden group mt-1">
+          <div class="absolute left-0 top-0 bottom-0 w-1 bg-orange-900/40"></div>
+          <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center text-xl">💡</div>
+          <div class="text-left"><span class="block text-[10px] font-mono font-bold text-orange-900/60 tracking-wider">02. MOFU (Meio) - TRUST</span><h4 class="text-white text-base font-semibold">Momento A-HA!</h4><p class="text-[11px] text-neutral-500 mt-1">Acesso ao Dashboard Executivo. Mostramos o "motor" gerando inteligência.</p></div>
+        </div>
+        
+        <div class="funnel-step z-10 w-full md:w-[24rem] bg-orange-500/10 border border-orange-500/50 shadow-[0_0_30px_rgba(249,115,22,0.15)] p-5 rounded-lg flex items-center gap-4 relative overflow-hidden group transform hover:scale-105 mt-1">
+          <div class="absolute left-0 top-0 bottom-0 w-1 bg-orange-500 shadow-[0_0_10px_#F97316]"></div>
+          <div class="w-10 h-10 rounded bg-orange-500/20 border border-orange-500/30 flex items-center justify-center text-xl">🎯</div>
+          <div class="text-left"><span class="block text-[10px] font-mono font-bold text-orange-400 tracking-wider">03. BOFU (Fundo) - UPSELL</span><h4 class="text-white text-base font-semibold">Venda Core SaaS</h4><p class="text-[11px] text-orange-200/70 mt-1">Adesão ao Logos Polis / ERP completo pós amostragem gratuita de poder.</p></div>
+        </div>
+        
+        <div class="funnel-step z-10 w-full md:w-[22rem] bg-[#0A0A0A] border border-white/10 p-5 rounded-lg flex items-center gap-4 relative overflow-hidden group mt-1">
+          <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-500/50"></div>
+          <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center text-xl">♾️</div>
+          <div class="text-left"><span class="block text-[10px] font-mono font-bold text-blue-500/50 tracking-wider">04. LTV - EXPAND</span><h4 class="text-white text-base font-semibold">Add-ons & Retainer</h4><p class="text-[11px] text-neutral-500 mt-1">Data Warehouse ativo. Cross-sell de automações exclusivas e consultoria Tech.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section id="roadmap" class="py-24 px-6 lg:px-12 max-w-[90rem] mx-auto border-t border-white/5 relative z-20">
+  <div class="text-center mb-16 anim" style="animation-delay:0.1s">
+    <h2 class="text-4xl text-white font-medium mb-4">Roadmap & Metas</h2>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 anim" style="animation-delay:0.3s">
+    <div class="p-6 bg-orange-500/5 border border-orange-500/30 relative">
+      <div class="absolute top-0 right-0 bg-orange-500 text-black text-[9px] font-bold px-2 py-1 uppercase tracking-widest"><span class="relative flex h-2 w-2 inline-block mr-1"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span></span>Agora</div>
+      <h3 class="text-sm font-mono text-orange-500 mb-4">FASE 1 — Validação</h3>
+      <ul class="space-y-3 mb-6">
+        <li class="flex items-start gap-2 text-xs text-neutral-300"><span class="text-orange-500 mt-0.5">▪</span>Lançamento Logos Polis</li>
+        <li class="flex items-start gap-2 text-xs text-neutral-300"><span class="text-orange-500 mt-0.5">▪</span>MVP ERP para oficinas</li>
+        <li class="flex items-start gap-2 text-xs text-neutral-300"><span class="text-orange-500 mt-0.5">▪</span>1ª venda recorrente</li>
+      </ul>
+      <div class="pt-4 border-t border-white/10 text-center"><span class="text-2xl font-light text-white tracking-tighter">R$5k</span><span class="block text-[10px] text-neutral-500 uppercase tracking-widest mt-1">META MRR</span></div>
+    </div>
+    <div class="p-6 bg-[#0A0A0A] border border-white/5 opacity-70">
+      <h3 class="text-sm font-mono text-neutral-500 mb-4">FASE 2 — Padronização</h3>
+      <ul class="space-y-3 mb-6">
+        <li class="flex items-start gap-2 text-xs text-neutral-400"><span class="text-neutral-700 mt-0.5">▪</span>10 clientes Logos Polis</li>
+        <li class="flex items-start gap-2 text-xs text-neutral-400"><span class="text-neutral-700 mt-0.5">▪</span>Modelos replicáveis n8n</li>
+        <li class="flex items-start gap-2 text-xs text-neutral-400"><span class="text-neutral-700 mt-0.5">▪</span>Processo de vendas estruturado</li>
+      </ul>
+      <div class="pt-4 border-t border-white/10 text-center"><span class="text-2xl font-light text-neutral-300 tracking-tighter">R$20k</span><span class="block text-[10px] text-neutral-600 uppercase tracking-widest mt-1">META MRR</span></div>
+    </div>
+    <div class="p-6 bg-[#0A0A0A] border border-white/5 opacity-50">
+      <h3 class="text-sm font-mono text-neutral-500 mb-4">FASE 3 — Escala</h3>
+      <ul class="space-y-3 mb-6">
+        <li class="flex items-start gap-2 text-xs text-neutral-400"><span class="text-neutral-700 mt-0.5">▪</span>Dashboard central unificado</li>
+        <li class="flex items-start gap-2 text-xs text-neutral-400"><span class="text-neutral-700 mt-0.5">▪</span>Time técnico sênior</li>
+        <li class="flex items-start gap-2 text-xs text-neutral-400"><span class="text-neutral-700 mt-0.5">▪</span>Máquina de aquisição ativa</li>
+      </ul>
+      <div class="pt-4 border-t border-white/10 text-center"><span class="text-2xl font-light text-neutral-400 tracking-tighter">R$50k</span><span class="block text-[10px] text-neutral-600 uppercase tracking-widest mt-1">META MRR</span></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="stack" class="py-24 px-6 lg:px-12 max-w-[90rem] mx-auto border-t border-white/5 relative z-20 pb-32">
+  <div class="text-center mb-16 anim" style="animation-delay:0.1s">
+    <h2 class="text-4xl text-white font-medium mb-4">Arquitetura de Guerra (Stack)</h2>
+    <p class="text-neutral-400 max-w-xl mx-auto text-sm">Nossas fundações focadas em Time to Market, Escalabilidade e Manutenção Assistida por IA.</p>
+  </div>
+  
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-12 anim" style="animation-delay:0.2s">
+    <!-- STACK -->
+    <div class="grid grid-cols-2 gap-4">
+      <div class="bg-gradient-to-br from-[#111] to-[#050505] p-6 border border-white/10 rounded-xl hover:border-blue-500/30 transition-all group relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 blur-[30px] rounded-full group-hover:bg-blue-500/20 transition-all"></div>
+        <div class="text-3xl mb-4 text-blue-400">⚛️</div>
+        <h4 class="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-3">Frontend</h4>
+        <ul class="text-sm text-white space-y-2 font-medium">
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-blue-500"></div>Next.js (App Router)</li>
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-blue-500"></div>React 18 / Tailwind v4</li>
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-blue-500"></div>Shadcn UI (Brutalista)</li>
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-blue-500"></div>Vercel Edge Deploy</li>
+        </ul>
+      </div>
+
+      <div class="bg-gradient-to-br from-[#111] to-[#050505] p-6 border border-white/10 rounded-xl hover:border-green-500/30 transition-all group relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-green-500/10 blur-[30px] rounded-full group-hover:bg-green-500/20 transition-all"></div>
+        <div class="text-3xl mb-4 text-green-400">🗄️</div>
+        <h4 class="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-3">Backend & DB</h4>
+        <ul class="text-sm text-white space-y-2 font-medium">
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-green-500"></div>Supabase Platform</li>
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-green-500"></div>Postgres (pgvector RLS)</li>
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-green-500"></div>FastAPI (Python Data)</li>
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-green-500"></div>Edge Functions (Deno)</li>
+        </ul>
+      </div>
+
+      <div class="bg-gradient-to-br from-[#111] to-[#050505] p-6 border border-white/10 rounded-xl hover:border-purple-500/30 transition-all group relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 blur-[30px] rounded-full group-hover:bg-purple-500/20 transition-all"></div>
+        <div class="text-3xl mb-4 text-purple-400">⚙️</div>
+        <h4 class="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-3">Automações</h4>
+        <ul class="text-sm text-white space-y-2 font-medium">
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-purple-500"></div>n8n Workflow Engine</li>
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-purple-500"></div>Evolution API / Z-api</li>
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-purple-500"></div>Typebot (Chat Builder)</li>
+        </ul>
+      </div>
+
+      <div class="bg-gradient-to-br from-[#111] to-[#050505] p-6 border border-white/10 rounded-xl hover:border-orange-500/30 transition-all group relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 blur-[30px] rounded-full group-hover:bg-orange-500/20 transition-all"></div>
+        <div class="text-3xl mb-4 text-orange-400">🤖</div>
+        <h4 class="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-3">Inteligência Artificial</h4>
+        <ul class="text-sm text-white space-y-2 font-medium">
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-orange-500"></div>Claude 3.5 Sonnet (Specs)</li>
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-orange-500"></div>Antigravity (Coding)</li>
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-orange-500"></div>GPT-4o (User OCR/Text)</li>
+          <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-orange-500"></div>Groq LPU (Real-time AI)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DIFERENCIAIS -->
+    <div class="flex flex-col justify-center">
+      <div class="bg-[#0A0A0A] border border-white/10 rounded-xl p-8 relative shadow-2xl overflow-hidden h-full flex flex-col justify-center">
+        <!-- Abstract Decoration -->
+        <svg class="absolute -right-12 -top-12 w-48 h-48 opacity-5" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="40" stroke="white" stroke-width="2" stroke-dasharray="4 4" /><circle cx="50" cy="50" r="20" stroke="white" stroke-width="1" /></svg>
+        
+        <h3 class="text-2xl text-white font-medium mb-8">Nossas Lâminas de Diferenciação</h3>
+        
+        <div class="space-y-6 relative z-10">
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-500 shrink-0 mt-1">1</div>
+            <div>
+              <h4 class="text-base font-semibold text-white mb-1">Agnosticismo Radical</h4>
+              <p class="text-sm text-neutral-400">Não vendemos software fechado. Codificamos a plataforma exata ao redor da dor latente do cliente com adaptação 100% sob medida.</p>
+            </div>
+          </div>
+          
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-500 shrink-0 mt-1">2</div>
+            <div>
+              <h4 class="text-base font-semibold text-white mb-1">Time to Value (TTV) Instantâneo</h4>
+              <p class="text-sm text-neutral-400">O ciclo de 10 passos associado ao framework do Antigravity permite lançar "MVPs Enterprise" em poucas semanas ao invés de meses.</p>
+            </div>
+          </div>
+          
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-500 shrink-0 mt-1">3</div>
+            <div>
+              <h4 class="text-base font-semibold text-white mb-1">Engenharia AI-First Intrínsica</h4>
+              <p class="text-sm text-neutral-400">Documentação e arquitetura inteiramente preparadas com Vector Databases. Todo software nasce com RAG e Agentes autônomos por design, não improviso.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- SCRIPTS & MODAL DATA -->
+<script>
+const words=document.querySelectorAll('.word');
+words.forEach(w=>{const d=w.getAttribute('data-delay');if(d)w.style.animation=`word-appear 0.8s ease-out ${d}ms forwards`;});
+
+const observer=new IntersectionObserver((e)=>{
+  e.forEach(entry=>{if(entry.isIntersecting){
+    const an=entry.target;
+    const delay = an.style.animationDelay || '';
+    an.style.animation = `fadeSlideIn 0.8s ease-out ${delay} forwards`;
+    observer.unobserve(an);
+  }});
+},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.anim').forEach(el=>{
+  el.style.opacity='0';
+  el.style.animation='none';
+  observer.observe(el);
+});
+
+document.addEventListener('mousemove',(e)=>{
+  const glow=document.getElementById('mouse-glow');
+  if(glow){
+    glow.style.left=`${e.clientX}px`;
+    glow.style.top=`${e.clientY}px`;
+  }
+});
+
+
+
+const workflowData = {
+  1: {
+    title: "01 | IDEIA — Clarificação do Problema",
+    badge: "Agente: ChatGPT / Claude",
+    desc: "Workflow: Conversação Livre → Saída: 3 Perguntas Respondidas.",
+    content: `
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex-1 space-y-4">
+          <p class="text-sm text-neutral-300 leading-relaxed">Antes de qualquer código ou PRD, você deve usar IA Externa para focar a sua mente no problema exato. Essa etapa corta ruídos e evita o "Scope Creep". Siga o prompt ao lado como um bate volta.</p>
+          <div class="bg-black/30 p-4 border border-white/5 rounded">
+            <h4 class="text-xs font-mono text-orange-400 mb-2">Exemplo Real Logos Polis:</h4>
+            <ul class="text-[11px] text-neutral-400 leading-relaxed space-y-1">
+              <li><strong>1. Problema:</strong> Vereadores perdem demandas no WhatsApp.</li>
+              <li><strong>2. Sentido por:</strong> O vereador e assessores focais.</li>
+              <li><strong>3. Solução Mínima:</strong> CRM que ingere as msgs fatiadas.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flex-1">
+          <h4 class="text-xs font-mono uppercase tracking-widest text-[#00E5FF] mb-3">Prompt Inicial External</h4>
+          <pre class="bg-[#111] p-4 text-[11px] font-mono text-neutral-300 border border-white/10 whitespace-pre-wrap rounded shadow-inner">Preciso clarear uma ideia de produto.
+Me faça perguntas para eu conseguir responder:
+
+1. Qual é o problema exato? (1 frase)
+2. Quem sente esse problema? (1 frase)
+3. Qual é a solução mínima que resolve? (3 frases)
+
+Contexto base: [Sua Ideia Bruta]</pre>
+        </div>
+      </div>`
+  },
+  2: {
+    title: "02 | PRD — Product Requirements Document",
+    badge: "Agente: ChatGPT / Claude",
+    desc: "Workflow: Definição Escopo → Saída: logos-polis/PRD.md",
+    content: `
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex-1 space-y-4">
+          <p class="text-sm text-neutral-300 leading-relaxed">O PRD é a Lei Magna. Se não está no PRD, não é escopo. Este arquivo é a bússola para todo o projeto e será lido milhares de vezes pelo Antigravity.</p>
+          <div class="bg-indigo-500/10 border border-indigo-500/30 p-3 rounded">
+            <p class="text-[11px] text-indigo-200 font-mono"><strong>Aviso:</strong> Certifique-se de preencher as seções "Fora de Escopo" e "Métricas". Elas são vitais para o Agente Planner depois.</p>
+          </div>
+        </div>
+        <div class="flex-1">
+          <h4 class="text-xs font-mono uppercase tracking-widest text-[#00E5FF] mb-3">Prompt Criação Documento</h4>
+          <pre class="bg-[#111] p-4 text-[11px] font-mono text-neutral-300 border border-white/10 whitespace-pre-wrap h-[180px] overflow-y-auto custom-scrollbar rounded shadow-inner">Com base nessa ideia, escreva um PRD.md
+seguindo exatamente esta estrutura:
+
+## Problema
+## Solução
+## Público
+## MVP — O que entra
+## Fora do escopo
+## Métricas
+
+Contexto: [Cole as respostas da ETAPA 1].
+Seja diretivo e evite jargões.</pre>
+        </div>
+      </div>`
+  },
+  3: {
+    title: "03 | ARQUITETURA — Decisão de Stack & Dados",
+    badge: "Agentes: Claude + @orchestrator",
+    desc: "Skill: architecture → Saída: ARCHITECTURE.md + docs/glossary.md",
+    content: `
+      <div class="flex flex-col gap-6">
+        <p class="text-sm text-neutral-300 leading-relaxed">Crie o esqueleto com o Claude, depois convoque o Antigravity apenas para averiguação rigorosa de viabilidade estrutural.</p>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="space-y-3">
+             <h4 class="text-xs font-mono uppercase tracking-widest text-[#00E5FF] flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-[#00E5FF]"></div> 1. Escrita (Claude Externa)</h4>
+             <pre class="bg-[#111] p-4 text-[11px] font-mono text-neutral-300 border border-[#00E5FF]/20 whitespace-pre-wrap rounded shadow-inner h-[280px] overflow-y-auto custom-scrollbar">Com base nesse PRD, escreva o 
+ARCHITECTURE.md seguindo:
+
+## Stack (Back / Front / DB / Automação / IA)
+## Estrutura de camadas lógicas
+## Banco de dados (tabelas core)
+## Fluxos críticos (pseudocódigo)
+## Integrações externas de risco
+
+Restrições:
+- Supabase (PostgreSQL RLS)
+- Next.js + Tailwind
+- Automação: N8N
+- IA: OpenAI / GroqLPU</pre>
+          </div>
+          
+          <div class="space-y-3">
+             <h4 class="text-xs font-mono uppercase tracking-widest text-orange-400 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-orange-400"></div> 2. Auditoria (@orchestrator)</h4>
+             <pre class="bg-[#111] p-4 text-[11px] font-mono text-orange-50/70 border border-orange-500/20 whitespace-pre-wrap rounded shadow-inner h-[130px] overflow-y-auto custom-scrollbar mb-4">No Antigravity (@orchestrator), rode:
+
+"Leia ARCHITECTURE.md e PRD.md. 
+NÃO gere código. Faça análise de stress:
+1. Há falha técnica que quebra build?
+2. Faltou tabela óbvia de relação?
+3. Qual integração é maior risco?"</pre>
+             <h4 class="text-xs font-mono uppercase tracking-widest text-purple-400 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-purple-400"></div> 3. Criação do Dicionário RAG</h4>
+             <pre class="bg-[#111] p-4 text-[11px] font-mono text-neutral-300 border border-purple-500/20 whitespace-pre-wrap rounded shadow-inner h-[95px] overflow-y-auto custom-scrollbar">No Antigravity (@orchestrator), rode:
+
+"Baseado no ARCHITECTURE e PRD, 
+crie o docs/glossary.md com os termos
+vitais do negócio para uso futuro via RAG."</pre>
+          </div>
+        </div>
+      </div>`
+  },
+  4: {
+    title: "04 | DESIGN SYSTEM — Tokens & Estética",
+    badge: "Agente: @frontend-specialist",
+    desc: "Skill: frontend-design → Saída: docs/design-system.md",
+    content: `
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex-1 space-y-4">
+          <p class="text-sm text-neutral-300 leading-relaxed">Protege o projeto contra o efeito "Puxadinho Visual". O Front-end cria os Tokens no CSS raiz e não toca em telas até que as fundações estéticas da Marca existam no Tailwind.</p>
+          <div class="bg-indigo-500/10 border border-indigo-500/30 p-3 rounded">
+            <p class="text-[11px] text-indigo-300 font-mono"><strong>Agentes Utilizados:</strong><br/>@frontend-specialist com a skill ` + '`ui-ux-pro-max` ou <code>frontend-design</code>' + `</p>
+          </div>
+        </div>
+        <div class="flex-1">
+          <h4 class="text-xs font-mono uppercase tracking-widest text-orange-400 mb-3">Prompt no Antigravity</h4>
+          <pre class="bg-[#111] p-4 text-[11px] font-mono text-neutral-300 border border-orange-500/20 whitespace-pre-wrap rounded shadow-inner h-[200px] overflow-y-auto custom-scrollbar">"Atue como @frontend-specialist e crie
+o docs/design-system.md. 
+
+- Paleta completa (Hex p/ background, surface, etc)
+- Typography Escala Tailwind
+- Componentes Base Shadcn
+
+Contexto Visual: [Dark Mode Brutalista]
+
+Após criar, injete esses Tokens no tailwind.config.ts 
+e globals.css. NÃO faça telas ainda!"</pre>
+        </div>
+      </div>`
+  },
+  5: {
+    title: "05 | TASKS — O Mapa de Batalha (Breakdown)",
+    badge: "Workflow Mestre: /plan",
+    desc: "Agente: @project-planner → Saída: docs/tasks.md priorizado",
+    content: `
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex-1 space-y-4">
+          <p class="text-sm text-neutral-300 leading-relaxed">Use a função /plan para evocar a skill <code>plan-writing</code>. O PM quebrará as features grandes vindas do PRD em Micro-Tasks lógicas.</p>
+          <div class="bg-black/30 p-4 border border-white/5 rounded">
+            <h4 class="text-xs font-mono text-orange-400 mb-2">Após rodar o Breakdown:</h4>
+            <p class="text-xs text-neutral-400 border-l border-white/20 pl-3">Preencha o arquivo <code class="text-white">STATE-PROJECT.md</code> definindo: Fase Atual + O Que a IA Já Fez + Próximo Passo Categórico Exato.</p>
+          </div>
+        </div>
+        <div class="flex-1">
+          <h4 class="text-xs font-mono uppercase tracking-widest text-orange-400 mb-3">Comando /plan Direto</h4>
+          <pre class="bg-[#111] p-4 text-[11px] font-mono text-neutral-300 border border-orange-500/20 whitespace-pre-wrap h-[200px] overflow-y-auto rounded shadow-inner custom-scrollbar">/plan Leia PRD e ARCHITECTURE. 
+Gere docs/tasks.md priorizado.
+
+Condições:
+- Categorias: Backend, Frontend, Infra.
+- Ordene por dependência severa!
+- 1 Task = 1 Funcionalidade Testável Isolada
+- Não inclua rotinas de deploy agora.</pre>
+        </div>
+      </div>`
+  },
+  6: {
+    title: "06 | BUILD — A Construção e Engenharia",
+    badge: "Agentes Múltiplos Especialistas (Build)",
+    desc: "Workflow: Execução de Tasks → Saída: Código em Staging",
+    content: `
+      <div class="w-full">
+        <!-- TABS NAV -->
+        <div class="flex flex-wrap gap-2 mb-6 border-b border-white/10 pb-2">
+           <button onclick="document.querySelectorAll('.b-tab').forEach(e=>e.classList.add('hidden')); document.getElementById('b-tab1').classList.remove('hidden'); document.querySelectorAll('.t-btn').forEach(b=>b.classList.remove('text-orange-500','border-b-2','border-orange-500')); this.classList.add('text-orange-500','border-b-2','border-orange-500');" class="t-btn text-xs font-medium text-orange-500 border-b-2 border-orange-500 pb-2 px-2 transition-all">1. Workflow Diário (@orchestrator)</button>
+           <button onclick="document.querySelectorAll('.b-tab').forEach(e=>e.classList.add('hidden')); document.getElementById('b-tab2').classList.remove('hidden'); document.querySelectorAll('.t-btn').forEach(b=>b.classList.remove('text-orange-500','border-b-2','border-orange-500')); this.classList.add('text-orange-500','border-b-2','border-orange-500');" class="t-btn text-xs font-medium text-neutral-400 pb-2 px-2 transition-all">2. Database (@backend-specialist)</button>
+           <button onclick="document.querySelectorAll('.b-tab').forEach(e=>e.classList.add('hidden')); document.getElementById('b-tab3').classList.remove('hidden'); document.querySelectorAll('.t-btn').forEach(b=>b.classList.remove('text-orange-500','border-b-2','border-orange-500')); this.classList.add('text-orange-500','border-b-2','border-orange-500');" class="t-btn text-xs font-medium text-neutral-400 pb-2 px-2 transition-all">3. Backend (Skill: api-patterns)</button>
+           <button onclick="document.querySelectorAll('.b-tab').forEach(e=>e.classList.add('hidden')); document.getElementById('b-tab4').classList.remove('hidden'); document.querySelectorAll('.t-btn').forEach(b=>b.classList.remove('text-orange-500','border-b-2','border-orange-500')); this.classList.add('text-orange-500','border-b-2','border-orange-500');" class="t-btn text-xs font-medium text-neutral-400 pb-2 px-2 transition-all">4. Frontend (@frontend-specialist)</button>
+        </div>
+
+        <!-- TABS CONTENT -->
+        <div id="b-tab1" class="b-tab animate-[fadeIn_0.3s_ease-out_forwards]">
+            <p class="text-sm text-neutral-300 mb-4 h-10">Mantenha a sanidade de contexto diário conversando com o <code class="text-orange-400">@orchestrator</code> global.</p>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-[#111] p-4 border border-white/5 rounded">
+                <span class="text-[10px] uppercase font-mono text-orange-400 block mb-2">INÍCIO DA SESSÃO</span>
+                <pre class="text-[11px] text-neutral-300 font-mono whitespace-pre-wrap">"@orchestrator leia STATE-PROJECT.md para ver onde paramos. Nossa próxima task no docs/tasks.md será: [Cole a task]."</pre>
+              </div>
+              <div class="bg-[#111] p-4 border border-white/5 rounded">
+                <span class="text-[10px] uppercase font-mono text-orange-400 block mb-2">FIM DA SESSÃO</span>
+                <pre class="text-[11px] text-neutral-300 font-mono whitespace-pre-wrap">"@orchestrator atualize o STATE-PROJECT.md com os PRs de hoje e defina o próximo passo físico exato."</pre>
+              </div>
+            </div>
+        </div>
+
+        <div id="b-tab2" class="b-tab hidden animate-[fadeIn_0.3s_ease-out_forwards]">
+            <p class="text-sm text-neutral-300 mb-4 h-10">Use <code class="text-orange-400">@backend-specialist</code> + Skill <code>database-design</code> para o coração do Supabase.</p>
+            <div class="flex gap-4">
+              <pre class="flex-1 bg-[#111] p-4 text-[11px] text-neutral-300 font-mono border border-orange-500/20 rounded h-[140px] overflow-y-auto custom-scrollbar whitespace-pre-wrap">"@backend-specialist crie migrations do 
+Supabase com base no ARCHITECTURE.md.
+
+Regras Estritas:
+1. Always Use created_at / updated_at
+2. Soft Delete (deleted_at) para entidades vitais.
+3. Index nas colunas alvo de query."</pre>
+            </div>
+        </div>
+
+        <div id="b-tab3" class="b-tab hidden animate-[fadeIn_0.3s_ease-out_forwards]">
+            <p class="text-sm text-neutral-300 mb-4 h-10">Use <code class="text-orange-400">@backend-specialist</code> + Skill <code>api-patterns</code> para MVC severo na API.</p>
+            <div class="flex gap-4">
+              <pre class="flex-1 bg-[#111] p-4 text-[11px] text-neutral-300 font-mono border border-orange-500/20 rounded whitespace-pre-wrap h-[140px] overflow-y-auto custom-scrollbar">"Atue como @backend-specialist. 
+Feature [X] (Lógica / API).
+
+Crie na cascata 100% isolada:
+1. Repository (Onde roda a Query)
+2. Service (Orquestra a Regra e IA Externa)
+3. Route / API Endpoint (Recebe Req)
+4. Schema (Zod Validations Strict)"</pre>
+              <div class="w-1/3 bg-[#111] border border-white/10 p-4 rounded flex flex-col justify-center h-[140px]">
+                 <span class="text-[11px] text-white font-mono uppercase mb-2 block">Skill Req</span>
+                 <p class="text-[10px] text-neutral-400">Peça para evocar <code>clean-code</code> e <code>api-patterns</code>. Exija tipagem pesada no Typescript / Python FastAPI.</p>
+              </div>
+            </div>
+        </div>
+
+        <div id="b-tab4" class="b-tab hidden animate-[fadeIn_0.3s_ease-out_forwards]">
+            <p class="text-sm text-neutral-300 mb-4 h-10">Use <code class="text-orange-400">@frontend-specialist</code> com <code>frontend-design</code> para telas brutais de Figma-level.</p>
+            <pre class="bg-[#111] p-4 text-[11px] text-neutral-300 font-mono border border-orange-500/20 rounded whitespace-pre-wrap h-[140px] overflow-y-auto custom-scrollbar">"@frontend-specialist construa a Dashboard Screen.
+Skills on: <code>frontend-design</code> e <code>clean-code</code>.
+
+Regras:
+1. Puxar Cores APENAS dos Tokens do docs/design-system.md
+2. Usar Shadcn UI modificado.
+3. Encapsular a lógica de Server Action isolada do Client Component."</pre>
+        </div>
+      </div>`
+  },
+  7: {
+    title: "07 | VALIDATE — Controle de Qualidade Sistêmico (QA)",
+    badge: "Agentes: @qa-automation-engineer & @security-auditor",
+    desc: "Workflow Pós-Feature → Saída: Aplicação Blindada Exaustivamente",
+    content: `
+      <div class="w-full">
+        <!-- TABS NAV -->
+        <div class="flex flex-wrap gap-2 mb-6 border-b border-white/10 pb-2">
+           <button onclick="document.querySelectorAll('.v-tab').forEach(e=>e.classList.add('hidden')); document.getElementById('v-tab1').classList.remove('hidden'); document.querySelectorAll('.v-btn').forEach(b=>b.classList.remove('text-indigo-400','border-b-2','border-indigo-400')); this.classList.add('text-indigo-400','border-b-2','border-indigo-400');" class="v-btn text-xs font-medium text-indigo-400 border-b-2 border-indigo-400 pb-2 px-2 transition-all">1. QA Funcional (@qa-automation-engineer)</button>
+           <button onclick="document.querySelectorAll('.v-tab').forEach(e=>e.classList.add('hidden')); document.getElementById('v-tab2').classList.remove('hidden'); document.querySelectorAll('.v-btn').forEach(b=>b.classList.remove('text-indigo-400','border-b-2','border-indigo-400')); this.classList.add('text-indigo-400','border-b-2','border-indigo-400');" class="v-btn text-xs font-medium text-neutral-400 pb-2 px-2 transition-all">2. Segurança Sistêmica (@security-auditor)</button>
+           <button onclick="document.querySelectorAll('.v-tab').forEach(e=>e.classList.add('hidden')); document.getElementById('v-tab3').classList.remove('hidden'); document.querySelectorAll('.v-btn').forEach(b=>b.classList.remove('text-indigo-400','border-b-2','border-indigo-400')); this.classList.add('text-indigo-400','border-b-2','border-indigo-400');" class="v-btn text-xs font-medium text-neutral-400 pb-2 px-2 transition-all">3. Performance Optimization</button>
+        </div>
+
+        <!-- TABS CONTENT -->
+        <div id="v-tab1" class="v-tab animate-[fadeIn_0.3s_ease-out_forwards]">
+            <p class="text-sm text-neutral-300 mb-4 h-10">Evoca Skills <code>webapp-testing</code> e Playwright Scripts para destroçar a estabilidade da UI.</p>
+            <pre class="bg-[#111] p-4 text-[11px] text-neutral-300 font-mono border border-indigo-500/20 rounded whitespace-pre-wrap h-[120px] overflow-y-auto custom-scrollbar">"@qa-automation-engineer execute testes de workflow!
+
+Teste:
+1. Happy Path Absoluto (Tudo funciona).
+2. Dirty Path (Campos soltos, nullables injetados).
+3. API Externa Offline (O que nossa UI plota se OpenAI cair?)"</pre>
+        </div>
+
+        <div id="v-tab2" class="v-tab hidden animate-[fadeIn_0.3s_ease-out_forwards]">
+            <p class="text-sm text-neutral-300 mb-4 h-10">Evoca Skill <code>vulnerability-scanner</code>. A auditoria final antes de virar Release na Vercel.</p>
+            <pre class="bg-[#111] p-4 text-[11px] text-neutral-300 font-mono border border-indigo-500/20 rounded whitespace-pre-wrap h-[120px] overflow-y-auto custom-scrollbar">"@security-auditor rode varredura severa.
+
+Aponte se há:
+- RLS do PostgreSQL abertas liberando dados pro Público.
+- ENV Secrets em exposição de build client-side.
+- Injeções SQLi cruas / Payloads grandes sem Rate Limiting nas APIs."</pre>
+        </div>
+
+        <div id="v-tab3" class="v-tab hidden animate-[fadeIn_0.3s_ease-out_forwards]">
+            <p class="text-sm text-neutral-300 mb-4 h-10">Evoca Skill <code>performance-profiling</code> + Lighthouse. Elimina gargalos de SSR e Client Boundaries.</p>
+            <pre class="bg-[#111] p-4 text-[11px] text-neutral-300 font-mono border border-indigo-500/20 rounded whitespace-pre-wrap h-[120px] overflow-y-auto custom-scrollbar">"@frontend-specialist / @orchestrator teste
+a performance profunda com Lighthouse.
+
+Verifique:
+- Cumulative Layout Shift (CLS) do painel RAG.
+- Se algum Client Component gera Waterfall de fetching.
+- Se o font-rendering trava o LCP da HomePage."</pre>
+        </div>
+      </div>`
+  },
+  8: {
+    title: "08 | DOCUMENT — Documentação Viva Interna",
+    badge: "Agentes: @orchestrator / @project-planner",
+    desc: "Workflow: Consolidação Docs → Saída: Ecosystem documents/ Atualizado",
+    content: `
+      <div class="w-full">
+        <p class="text-sm text-neutral-300 leading-relaxed mb-4">Sempre mande o <code class="text-cyan-400">@orchestrator</code> extrair a Lógica Física gravando-a nos 4 Pilares de Markdown cru essenciais antes do RAG.</p>
+        
+        <!-- TABS NAV -->
+        <div class="flex flex-wrap gap-2 mb-6 border-b border-white/10 pb-2">
+           <button onclick="document.querySelectorAll('.d-tab').forEach(e=>e.classList.add('hidden')); document.getElementById('d-tab1').classList.remove('hidden'); document.querySelectorAll('.d-btn').forEach(b=>b.classList.remove('text-cyan-400','border-b-2','border-cyan-400')); this.classList.add('text-cyan-400','border-b-2','border-cyan-400');" class="d-btn text-xs font-medium text-cyan-400 border-b-2 border-cyan-400 pb-2 px-2 transition-all">1. Data Lineage (DB)</button>
+           <button onclick="document.querySelectorAll('.d-tab').forEach(e=>e.classList.add('hidden')); document.getElementById('d-tab2').classList.remove('hidden'); document.querySelectorAll('.d-btn').forEach(b=>b.classList.remove('text-cyan-400','border-b-2','border-cyan-400')); this.classList.add('text-cyan-400','border-b-2','border-cyan-400');" class="d-btn text-xs font-medium text-neutral-400 pb-2 px-2 transition-all">2. Flows UX</button>
+           <button onclick="document.querySelectorAll('.d-tab').forEach(e=>e.classList.add('hidden')); document.getElementById('d-tab3').classList.remove('hidden'); document.querySelectorAll('.d-btn').forEach(b=>b.classList.remove('text-cyan-400','border-b-2','border-cyan-400')); this.classList.add('text-cyan-400','border-b-2','border-cyan-400');" class="d-btn text-xs font-medium text-neutral-400 pb-2 px-2 transition-all">3. FAQ Operacional</button>
+           <button onclick="document.querySelectorAll('.d-tab').forEach(e=>e.classList.add('hidden')); document.getElementById('d-tab4').classList.remove('hidden'); document.querySelectorAll('.d-btn').forEach(b=>b.classList.remove('text-cyan-400','border-b-2','border-cyan-400')); this.classList.add('text-cyan-400','border-b-2','border-cyan-400');" class="d-btn text-xs font-medium text-neutral-400 pb-2 px-2 transition-all">4. Estratégia (Métrics/Glossário)</button>
+        </div>
+
+        <!-- TABS CONTENT -->
+        <div id="d-tab1" class="d-tab animate-[fadeIn_0.3s_ease-out_forwards]">
+            <div class="flex gap-4">
+              <div class="flex-1 space-y-3">
+                 <h4 class="text-xs font-mono text-cyan-400">Origem de Dados <code>data-lineage.md</code></h4>
+                 <div class="bg-black/30 p-3 rounded text-[11px] text-neutral-400 border border-white/5">Garante sobrevivência do banco sem perder views e triggers entre refatorações.</div>
+              </div>
+              <pre class="bg-[#111] p-4 text-[11px] text-neutral-300 font-mono border border-cyan-500/20 rounded h-[125px] overflow-y-auto custom-scrollbar w-[40%]">"@backend-specialist com as Migrations de hoje, 
+preencha docs/data-lineage.md 
+
+Descreva as origens lógicas, relacionamentos
+e views criadas do Supabase."</pre>
+            </div>
+        </div>
+
+        <div id="d-tab2" class="d-tab hidden animate-[fadeIn_0.3s_ease-out_forwards]">
+            <div class="flex gap-4">
+              <div class="flex-1 space-y-3">
+                 <h4 class="text-xs font-mono text-cyan-400">Visão Funcional <code>flows.md</code> e <code>features.md</code></h4>
+                 <div class="bg-black/30 p-3 rounded text-[11px] text-neutral-400 border border-white/5">Se você esquematizou o envio de email no n8n. Descreva o que clica, o que pisca, e o que o cliente vê se explodir!</div>
+              </div>
+              <pre class="bg-[#111] p-4 text-[11px] text-neutral-300 font-mono border border-cyan-500/20 rounded h-[125px] overflow-y-auto custom-scrollbar w-[40%]">"@orchestrator adicione entrada final de 
+hoje em docs/flows.md registrando:
+
+- Passo-a-passo Real da Funcionalidade
+- Status em Falha / Status em Sucesso
+- Quem é o Actor @role da Feature."</pre>
+            </div>
+        </div>
+
+        <div id="d-tab3" class="d-tab hidden animate-[fadeIn_0.3s_ease-out_forwards]">
+            <div class="flex gap-4">
+              <div class="flex-1 space-y-3">
+                 <h4 class="text-xs font-mono text-cyan-400">Resoluções de Crash <code>faq.md</code></h4>
+                 <div class="bg-black/30 p-3 rounded text-[11px] text-neutral-400 border border-white/5">Bugs resolvidos viram alimento para o ChatGPT não errar amanhã de novo.</div>
+              </div>
+              <pre class="bg-[#111] p-4 text-[11px] text-neutral-300 font-mono border border-cyan-500/20 rounded h-[125px] overflow-y-auto custom-scrollbar w-[40%]">"@qa-automation-engineer pegue o Bug
+que passamos de Vercel Build Timeout...
+
+Escreva uma lição de resolução duradoura
+e injete documentada em docs/faq.md."</pre>
+            </div>
+        </div>
+
+        <div id="d-tab4" class="d-tab hidden animate-[fadeIn_0.3s_ease-out_forwards]">
+             <div class="flex gap-4">
+              <div class="flex-1 space-y-3">
+                 <h4 class="text-xs font-mono text-cyan-400">Controles Mestres <code>metrics.md</code> e <code>glossary.md</code></h4>
+                 <div class="bg-black/30 p-3 rounded text-[11px] text-neutral-400 border border-white/5">Dicionário nativo impede o Agente de confundir "Processo" Jurídico com "Processo" Computacional num Chat Cliente.</div>
+              </div>
+              <div class="w-[40%] flex flex-col items-center justify-center bg-cyan-500/10 border border-cyan-500/30 rounded p-4 h-[125px]">
+                <p class="text-[10px] text-cyan-300 text-center font-mono">Skill Associada</p>
+                <p class="text-xs text-cyan-100 font-bold tracking-widest leading-relaxed mt-2"><code>PLAN-WRITING</code></p>
+              </div>
+            </div>
+        </div>
+
+      </div>`
+  },
+  9: {
+    title: "09 | RAG — Alimentação de Contexto (IA Assisstant)",
+    badge: "Integração: pgvector + LLM Endpoint",
+    desc: "Workflow Back-office → Saída: Dashboard Responde Dúvidas Instantâneas",
+    content: `
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex-1 space-y-4">
+          <p class="text-sm text-neutral-300 leading-relaxed">Esse é o "Plus Premium". Onde um CRM vira Inteligência Nível Platinium SaaS. Os arquivos Markdowns recém documentados sofrem Embedding no Servidor Node.js para servirem de Cérebro ao Agente Interno da aplicação Vercel.</p>
+          <div class="bg-black/30 p-4 border-l-2 border-orange-500/50 rounded-r">
+            <p class="text-xs text-neutral-400 leading-relaxed">
+              <strong>Integrações Associadas:</strong> Supabase Vector (pgvector) + LangChain + OpenAI Text-Embedding-3-Large.
+            </p>
+          </div>
+        </div>
+        <div class="flex-1 flex items-center justify-center p-6 border border-white/5 rounded relative overflow-hidden group">
+          <div class="absolute inset-0 bg-gradient-to-tr from-orange-500/5 to-transparent"></div>
+          <div class="relative z-10 text-center">
+            <div class="text-5xl mb-4 tracking-widest text-neutral-600 group-hover:text-orange-400 transition-colors">🧠 ≡ 🤖</div>
+            <p class="text-xs text-orange-200 font-mono tracking-widest">` + '`VECTOR SYNC RUNNING...`' + `</p>
+          </div>
+        </div>
+      </div>`
+  },
+  10: {
+    title: "10 | DEPLOY — Subida na Nuvem & Edge Delivery",
+    badge: "Workflow Mestre: /deploy",
+    desc: "Agente: @devops-engineer → Saída: Vercel em Produção Viva",
+    content: `
+      <div class="flex flex-col xl:flex-row gap-8">
+        <div class="flex-1 space-y-4">
+          <p class="text-sm text-neutral-300 leading-relaxed">Última etapa do Loop. Edge Servers Vercel compilam Next.js. Supabase consolida RLS de PRD. GitHub Actions engatilham pipelines. Mas só acaba quando você encerra o Contexto Ritualizado do Agente.</p>
+          
+          <h4 class="text-base font-semibold text-white mt-6 border-t border-white/5 pt-4 mb-4">Comando Final Pós-Supabase Up:</h4>
+          <pre class="bg-[#111] p-4 text-[11px] text-neutral-300 font-mono border border-green-500/20 rounded whitespace-pre-wrap">"/deploy ative o @devops-engineer e a 
+skill ` + '`deployment-procedures`' + `.
+
+- Update o STATE-PROJECT.md afirmando sucesso.
+- Adicione as variáveis Novas no Vercel ENV.
+- Se a IA cometeu vícios chatos hoje, grave uma
+restrição punitiva vitalícia no GEMINI.md"</pre>
+        </div>
+        <div class="flex-1 flex flex-col justify-center bg-[#090C09] p-8 border border-green-500/20 rounded-xl relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-green-500/10 blur-[50px]"></div>
+          <div class="text-5xl mb-6 relative z-10 drop-shadow-[0_0_15px_rgba(74,222,128,0.2)]">🌿 🚀</div>
+          <h4 class="text-xl text-green-400 font-semibold uppercase tracking-wider mb-2 relative z-10">Deploy Lançado (CI/CD)</h4>
+          <p class="text-xs text-green-300/60 leading-relaxed font-mono relative z-10">Agente Encerra Ciclo Tático | URL VERCEL ONLINE.</p>
+        </div>
+      </div>`
+  }
+};
+function showDrop(id, element) {
+  const master = document.getElementById('master-dropdown');
+  const allToggles = document.querySelectorAll('.dropdown-toggle');
+  
+  // Reset buttons
+  allToggles.forEach(el => el.classList.remove('border-orange-500/30', 'bg-orange-500/10'));
+  
+  // Highight active button
+  if(element) element.classList.add('border-orange-500/30', 'bg-orange-500/10');
+
+  // Fade out
+  master.style.opacity = '0';
+  master.style.transform = 'translateY(10px)';
+  
+  setTimeout(() => {
+    const data = workflowData[id];
+    master.innerHTML = `
+      <div class="animate-[fadeSlideIn_0.4s_ease-out_forwards]">
+        <div class="flex flex-wrap items-center gap-4 mb-6 pb-6 border-b border-white/10">
+          <h3 class="text-3xl text-white font-medium">` + data.title + `</h3>
+          <span class="px-4 py-1.5 bg-white/5 border border-white/10 text-orange-400 text-[11px] uppercase font-mono tracking-widest rounded-full">` + data.badge + `</span>
+        </div>
+        <p class="text-sm text-neutral-400 font-mono mb-8 bg-[#0a0a0a] p-4 rounded border-l-4 border-neutral-700">` + data.desc + `</p>
+        ` + data.content + `
+      </div>
+    `;
+    // Fade in
+    master.style.opacity = '1';
+    master.style.transform = 'translateY(0)';
+  }, 250);
+}
+
+// Inicializar mostrando o passo 1
+setTimeout(() => { showDrop(1, document.querySelector('.dropdown-toggle')); }, 100);
+const modalData = {
+  // MÓDULOS ECOSSISTEMA
+  'systems': {
+    title: 'Systems — Core Operacional',
+    icon: '💻',
+    content: `<div class="space-y-4 text-sm text-neutral-300">
+      <p>Desenvolvimento focado em aplicações "Core" para operações não-escaladas e mal parametrizadas.</p>
+      <div class="bg-white/5 p-4 border-l-2 border-orange-500"><strong>Pilar Central:</strong> Stack Next.js + Supabase. Desenvolvimento usando <em>Antigravity Workflows</em>, transformando PRDs descritivos de IA em apps brutais.</div>
+      <h4 class="text-white font-semibold mt-4 mb-2">Setores Prediletos / Uso:</h4>
+      <ul class="list-disc pl-5 space-y-1 text-neutral-400">
+        <li>Desenvolvimento B2B (Mão na massa em startups e produtos de clientes).</li>
+        <li>Operações Fragmentadas: Clínica médica (marcações vs prontuários), Oficinas Mecânicas (orçamentos vs estoque).</li>
+      </ul>
+    </div>`
+  },
+  'automations': {
+    title: 'Automations — IA & Workflows',
+    icon: '⚡',
+    content: `<div class="space-y-4 text-sm text-neutral-300">
+      <p>Integrações e orquestração backend baseadas em APIs e Wehooks, sem frontend direto em um primeiro momento (Backend/No-Code/Low-code first).</p>
+      <div class="bg-white/5 p-4 border-l-2 border-orange-500"><strong>Pilar Central:</strong> n8n + Make + Typebot + APIS Oficiais da META (Waba) + Evolution API / Z-api. Integração fortíssima de Modelos de Linguagem (LLM) no fluxo.</div>
+      <h4 class="text-white font-semibold mt-4 mb-2">Setores Prediletos / Uso:</h4>
+      <ul class="list-disc pl-5 space-y-1 text-neutral-400">
+        <li>Escritórios de Advocacia, Equipes de Vendas High-touch e Lançamentos.</li>
+        <li>Lead Qualification massivo.</li>
+      </ul>
+    </div>`
+  },
+  'analytics': {
+    title: 'Analytics — Dados & Inteligência',
+    icon: '📈',
+    content: `<div class="space-y-4 text-sm text-neutral-300">
+      <p>Camada final do ecossistema e maior barreira de entrada (entregável final do Retainer longo). Transforma dados operacionais sujos em BI decisório.</p>
+      <div class="bg-white/5 p-4 border-l-2 border-orange-500"><strong>Pilar Central:</strong> Visualização Next.js, Power BI ou Metabase. Pipeline em Python (ETL) puxando os dados de (Systems e Automations).</div>
+      <h4 class="text-white font-semibold mt-4 mb-2">Setores Prediletos / Uso:</h4>
+      <ul class="list-disc pl-5 space-y-1 text-neutral-400">
+        <li>Onde está o dinheiro grosso (Setor Público, Políticos eleitos, C-Levels, Gerências grandes).</li>
+        <li>Win Analytics: extração OCR e data-viz para apostadores.</li>
+      </ul>
+    </div>`
+  },
+  'growth': {
+    title: 'Growth — Marketing & Expansão',
+    icon: '🚀',
+    content: `<div class="space-y-4 text-sm text-neutral-300">
+      <p>O pijama tático de marketing/escala. Aquisição agressiva unindo ferramentas de SEO e automação.</p>
+      <div class="bg-white/5 p-4 border-l-2 border-orange-500"><strong>Pilar Central:</strong> Meta Ads MLOps, Automações de SEO (blog articles gpt), Cold Mailing em alta escala (Instantly).</div>
+      <h4 class="text-white font-semibold mt-4 mb-2">Setores Prediletos / Uso:</h4>
+      <ul class="list-disc pl-5 space-y-1 text-neutral-400">
+        <li>Infoprodutos da casa, expansão B2B pura (encontrar clínicas para oferecer 'Systems', etc).</li>
+      </ul>
+    </div>`
+  },
+  'pmes': {
+    title: 'Segmento Estratégico: PMEs',
+    icon: '🏭',
+    content: `<div class="space-y-4 text-sm text-neutral-300">
+      <p>Pequenas e médias empresas tradicionais que sofrem com processos manuais e planilhas desconectadas.</p>
+      <h4 class="text-white font-semibold mt-4 mb-2">Abordagem:</h4>
+      <ul class="list-disc pl-5 space-y-2 text-neutral-400">
+        <li><strong>Dor inicial:</strong> Controle e rastreabilidade (Ex: oficina não sabe o lucro real por carro).</li>
+        <li><strong>Solução (Land):</strong> MVP ERP focado na principal dor. Controle de OS, por exemplo.</li>
+        <li><strong>Expansão (Expand):</strong> Automação de WhatsApp para aprovação de orçamentos (Automations) → Dashboards financeiros (Analytics).</li>
+      </ul>
+    </div>`
+  },
+  'publico': {
+    title: 'Segmento Estratégico: Setor Público',
+    icon: '🏛️',
+    content: `<div class="space-y-4 text-sm text-neutral-300">
+      <p>Políticos em mandato (vereadores, deputados, prefeitos) e equipes de assessoria.</p>
+      <h4 class="text-white font-semibold mt-4 mb-2">Abordagem:</h4>
+      <ul class="list-disc pl-5 space-y-2 text-neutral-400">
+        <li><strong>Dor inicial:</strong> Organização de demandas e caos de mensagens de eleitores.</li>
+        <li><strong>Solução (Land):</strong> Logos Polis (CRM de eleitores + organização de demandas via Kanban).</li>
+        <li><strong>Expansão (Expand):</strong> Inteligência geo-localizada, categorização com IA, respostas padronizadas (Automations + Analytics).</li>
+      </ul>
+    </div>`
+  },
+  'startups': {
+    title: 'Segmento Estratégico: Startups/Tech',
+    icon: '🚀',
+    content: `<div class="space-y-4 text-sm text-neutral-300">
+      <p>Empresas nascentes com foco em escala acelerada.</p>
+      <h4 class="text-white font-semibold mt-4 mb-2">Abordagem:</h4>
+      <ul class="list-disc pl-5 space-y-2 text-neutral-400">
+        <li><strong>Dor inicial:</strong> Dívida técnica e falta de produto core desenvolvido rápido.</li>
+        <li><strong>Solução (Land):</strong> Desenvolvimento ágil do MVP (SaaS Micro-nicho) via Antigravity e Claude.</li>
+        <li><strong>Expansão (Expand):</strong> Esteira de Growth e orquestração com APIs tier 1 terceirizadas.</li>
+      </ul>
+    </div>`
+  },
+  // FILES
+  'file_prd': {
+    title: 'Arquivo: PRD.md',
+    icon: '📄',
+    content: `<div class="space-y-4 text-sm text-neutral-300">
+      <p>O <strong>Product Requirements Document</strong> é a lei magna do desenvolvimento inicial. Se não está no PRD, não é escopo.</p>
+      <pre class="bg-black/50 p-4 font-mono text-xs border border-white/10 overflow-x-auto text-green-400"># Estrutura Exata Gerada pelo CLI:
+1. Problema (Qual dor resolvemos?)
+2. Solução (Como o app cura a dor?)
+3. Público (Quem usa?)
+4. MVP - O que entra (Crucial para o Dev)
+5. Fora do Escopo (Evitar Scope Creep)
+6. Métricas de Sucesso</pre>
+      <p class="text-neutral-400 italic">O PRD deve ser escrito em conjunto com o Claude no "Modo Ideia" usando os prompts do GUIA-INICIO-PROJETO.md</p>
+    </div>`
+  },
+  'file_arch': {
+    title: 'Arquivo: ARCHITECTURE.md',
+    icon: '🏗️',
+    content: `<div class="space-y-4 text-sm text-neutral-300">
+      <p>O documento que traduz os requisitos de negócio (PRD) para a máquina (Antigravity).</p>
+      <pre class="bg-black/50 p-4 font-mono text-xs border border-white/10 overflow-x-auto text-blue-400"># Seções Obrigatórias:
+- Stack definida
+- Estrutura de camadas (Ex: Controler->Service->Repo)
+- Fluxos Críticos do banco de dados
+- Integrações e APIs exigidas
+- Vars de Ambiente</pre>
+      <p class="text-neutral-400">Só escreve código depois que este arquivo e o design-system.md estiverem preenchidos.</p>
+    </div>`
+  },
+  'file_gemini': {
+    title: 'Arquivo: GEMINI.md',
+    icon: '🧠',
+    content: `<div class="space-y-4 text-sm text-neutral-300">
+      <p>Este arquivo é injetado no <strong>Permanent Context</strong> (Custom Instructions) do Agente (cursor ou Antigravity). Cada caractere custa token.</p>
+      <pre class="bg-black/50 p-4 font-mono text-[11px] border border-white/10 overflow-x-auto text-amber-400"># Exemplo Real de Regra no GEMINI.md:
+"Não pule camadas. Um componente frontend NÃO deve fazer 
+query direta ao Supabase. Chame um Service, que compõe 
+a request. O Backend recebe no Controller, passa pro 
+Service e o Repository fala com o DB."</pre>
+      <p class="text-neutral-400">Mantenha sempre atualizado de forma sutil conforme problemas no código vão sendo ensinados para a IA.</p>
+    </div>`
+  },
+  'file_workflow': {
+    title: 'Arquivo: Workflow.md',
+    icon: '🔄',
+    content: `<div class="space-y-3 text-sm text-neutral-300 lg:flex lg:gap-4 lg:items-start">
+      <div class="flex-1">
+        <p>A representação literal do funil de produção <strong>Claude → Antigravity → Deploy</strong>.</p>
+        <p class="mt-2 text-neutral-400">A Logos Tech padronizou um pipeline de 10 etapas para não ter retrabalho e não gerar "código panqueca" escrito via IA. O <span class="text-orange-400">Workflow.md</span> explica o que fazer e, principalmente, <em>quem</em> faz (Human/Claude vs Agent/AG).</p>
+      </div>
+      <div class="flex-1 bg-black/30 p-4 border border-white/10 font-mono text-[10px] text-green-500">
+        [CLAUDE] IDEIA → PRD → ARQUITETURA → DS<br/>
+        ↓ handover<br/>
+        [AGENT] TASKS → BUILD → VALIDATE → DOCS<br/>
+        ↓ pipeline<br/>
+        [RAG] → EXPORT TO SYSTEM<br/>
+        ↓ infra<br/>
+        [DEPLOY] → GO LIVE
+      </div>
+    </div>`
+  },
+  'file_guia': {
+    title: 'Arquivo: GUIA-INICIO-PROJETO.md',
+    icon: '📘',
+    content: `<div class="space-y-4 text-sm text-neutral-300">
+      <p>O arquivo de Prompts Práticos. O manual que todo projeto consulta primeiro.</p>
+      <div class="bg-black/30 p-4 border-l-2 border-orange-500 text-neutral-400 italic">
+        "Copie isso e cole no Claude: 'Aja como Arquiteto de Software. Nosso PRD é este [COLE]. Monte o ARCHITECTURE.md focado em camadas...'"
+      </div>
+      <p>Ele dá vida ao <span class="text-orange-400">Workflow.md</span> detalhando como <strong>iniciar</strong> os projetos. Exemplo real salvo no GUIA: o prompt para extrair as variáveis CSS (design-system) das telas do Logos Polis.</p>
+    </div>`
+  },
+  'file_state': {
+    title: 'Arquivo: STATE-PROJECT.md',
+    icon: '📍',
+    content: `<div class="space-y-4 text-sm text-neutral-300">
+      <p>A 'caderneta de anotações' da sessão do Antigravity. Como o LLM esquece após um tempo, ele registra onde parou no STATE.</p>
+      <pre class="bg-black/50 p-4 font-mono text-xs border border-white/10 text-rose-400">## Fase atual
+Build Tela X
+
+## Em andamento
+Integrando a tabela 'messages' com realtime.
+
+## Próximo Passo
+Resolver o RLS Policy 406 Error.</pre>
+    </div>`
+  }
+};
+
+const overlay = document.getElementById('modal-overlay');
+const box = document.getElementById('modal-box');
+const body = document.getElementById('modal-body');
+
+function openModal(id) {
+  const data = modalData[id];
+  if(!data) return;
+  body.innerHTML = `
+    <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+      <div class="w-10 h-10 bg-orange-500/10 border border-orange-500/30 rounded flex items-center justify-center text-xl">${data.icon}</div>
+      <h2 class="text-xl font-medium text-white">${data.title}</h2>
+    </div>
+    ${data.content}
+  `;
+  overlay.classList.add('active');
+  box.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  overlay.classList.remove('active');
+  box.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close on escape
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+</script>
+</body></html>
