@@ -1,32 +1,30 @@
 # ESTADO DO PROJETO — Logos Tech Site Institucional
 
 ## Fase atual
-**🔴 FASE DE PLANEJAMENTO: CONCLUÍDA (READY FOR BUILD)**  
-O projeto passou pela triagem técnica, análise de stress e quebra de tarefas. Toda a base estratégica está documentada e o roteiro técnico está priorizado.
+**🟢 FASE DE OTIMIZAÇÃO E DEPLOY: CONCLUÍDA**  
+O sistema foi totalmente otimizado para Core Web Vitals, inconsistências de UI foram sanadas e o repositório GitHub está configurado com todos os assets necessários para o deploy em produção.
 
 ## O que a IA já fez
-- **Análise de Stress:** Identificação e resolução de riscos de runtime (Edge vs Node) e captura de leads.
-- **Documentação de Negócio:** Criação do **PRD** (Públicos e Copy) e **Glossário** (Termos Vitais para RAG).
-- **Documentação Técnica:** Criação da **ARCHITECTURE** (Stack de Guerra) e **Design System** tokens.
-- [x] **Setup Baseline:** Next.js 15 + Tailwind 4 + Shadcn UI pronto.
-- [x] **Design Tokens:** Tokens do `design-system.html` aplicados em `globals.css`.
-- [x] **Backend Logic:** Server Action `log-lead.ts` integrada ao Supabase.
-- [x] **Build das Seções:** Navbar, Hero, Serviços, Portfólio, Processo, Stack, Contato e Footer.
-- [x] **Animações Premium:**
-    - Mouse Follower ambient glow.
-    - Floating Particles canvas layer.
-    - Scroll Progress neon bar.
-    - 3D Tilt Cards em Serviços e Portfólio.
-    - Infinite Marquee no Stack de tecnologia.
-    - Animated Counters na nova seção de Stats.
-    - Shimmering headings e Liquid buttons.
-    - Word-by-word reveal no Hero.
+- **Otimização de Performance:**
+    - [x] **Code Splitting:** Implementação de `next/dynamic` para seções abaixo da dobra.
+    - [x] **Hydration Skeletons:** Adição de placeholders para evitar CLS (Cumulative Layout Shift).
+    - [x] **Image Optimization:** Migração para `next/image` em todo o portfólio.
+- **Correções e Refinamento:**
+    - [x] **Bug Fix:** Migração global de ícones (MessageSquare) para estabilidade no build.
+    - [x] **UI Consistency:** Padronização dos cards do portfólio (unificação visual).
+    - [x] **Mobile First:** Revisão da responsividade do Menu e Seções.
+- **Infraestrutura e Deploy:**
+    - [x] **GitHub Ops:** Inicialização do repositório e configuração de Git LFS/Ignore para imagens.
+    - [x] **Vercel Config:** Identificação do Root Directory (`projeto/frontend`) e teste de build.
+- **Design & UX:**
+    - [x] **Design Tokens:** Tokens do `design-system.html` aplicados.
+    - [x] **Animações Premium:** Mouse Follower, Particles, 3D Tilt, Scroll Progress e Shimmering.
 
 ## Em andamento
-- Finalizar o refinamento do **Footer**, implementar **Textura de Ruído (Noise)** global e realizar o **Manual Audit** final via `checklist.py`.
+- Configuração final de variáveis de ambiente no painel do Vercel e monitoramento de logs de produção.
 
 ## Próximo passo categórico exato
-**🚀 Executar Task INF-001:** Setup inicial do Next.js 15 (App Router) + Tailwind CSS v4 no diretório `projeto/frontend`.
+**🚀 Lançamento em Produção:** Finalizar o deploy no Vercel vinculando o domínio e validando o formulário de conversão (Log Lead).
 
 ## Decisões recentes
 - **Stack:** Next.js 15 + Supabase + Tailwind v4.
