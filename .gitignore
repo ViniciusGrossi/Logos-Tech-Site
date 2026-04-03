@@ -32,18 +32,19 @@ STRATEGY.md
 tmp/
 brain/
 artifacts/
-# Allow specific project images and assets
-!projeto/frontend/public/**/*.webp
-!projeto/frontend/public/**/*.png
-!projeto/frontend/public/**/*.jpg
-!projeto/frontend/public/**/*.jpeg
-
+# Exclude common media by default
 *.webp
 *.png
 *.jpg
 *.jpeg
 *.mp4
 *.mov
+
+# Re-include project specific assets for deployment
+!projeto/frontend/public/**/*.webp
+!projeto/frontend/public/**/*.png
+!projeto/frontend/public/**/*.jpg
+!projeto/frontend/public/**/*.jpeg
 
 # IDE
 .vscode/
