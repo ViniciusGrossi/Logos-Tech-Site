@@ -32,6 +32,12 @@ STRATEGY.md
 tmp/
 brain/
 artifacts/
+# Allow specific project images and assets
+!projeto/frontend/public/**/*.webp
+!projeto/frontend/public/**/*.png
+!projeto/frontend/public/**/*.jpg
+!projeto/frontend/public/**/*.jpeg
+
 *.webp
 *.png
 *.jpg

@@ -54,9 +54,7 @@ export function Portfolio() {
                 onClick={() => setSelectedProject(project)}
               >
                 <TiltCard intensity={8}>
-                  <div className="group border border-white/5 bg-[var(--lt-surface)] hover:border-[var(--lt-border-hover)] transition-all duration-500 flex flex-col h-full overflow-hidden relative"
-                    style={{ animation: i === 0 ? "glow-pulse 4s ease-in-out infinite" : undefined }}
-                  >
+                  <div className="group border border-white/5 bg-[var(--lt-surface)] hover:border-[var(--lt-border-hover)] transition-all duration-500 flex flex-col h-full overflow-hidden relative">
                     {/* Visual Media Container */}
                     <div className="aspect-video bg-neutral-900 relative overflow-hidden">
                       {/* Actual Project Image */}
