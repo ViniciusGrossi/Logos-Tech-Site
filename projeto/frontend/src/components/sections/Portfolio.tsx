@@ -138,7 +138,10 @@ export function Portfolio() {
 
         {/* Plan A Immersive Case Study Modal */}
         {selectedProject && (
-          <DialogContent className="w-[95vw] sm:max-w-4xl bg-[#0F0F0F] border-white/10 p-0 overflow-hidden max-h-[92vh] flex flex-col rounded-none md:rounded-sm">
+          <DialogContent 
+            showCloseButton={false} 
+            className="w-[95vw] sm:max-w-4xl bg-[#0F0F0F] border-white/10 p-0 overflow-hidden max-h-[92vh] !flex flex-col rounded-none md:rounded-sm z-[150] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
+          >
             <div className="relative overflow-y-auto custom-scrollbar flex-1">
               {/* Header with Visual */}
               <div className="relative h-56 md:h-80 w-full overflow-hidden shrink-0">
@@ -163,13 +166,13 @@ export function Portfolio() {
                    </h2>
                 </div>
 
-                <DialogClose className="absolute top-4 right-4 md:top-8 md:right-8 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-[var(--lt-orange)]/50 transition-all z-20">
+                <DialogClose className="absolute top-4 right-4 md:top-8 md:right-8 w-11 h-11 md:w-12 md:h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-[var(--lt-orange)]/50 transition-all z-20">
                   <X className="w-5 h-5 md:w-6 md:h-6" />
                 </DialogClose>
               </div>
 
-              <div className="p-6 md:p-12">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 mb-12">
+              <div className="p-5 md:p-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 mb-12">
                   {/* Left Column: Story */}
                   <div className="space-y-8 md:space-y-10">
                     <section>
@@ -235,7 +238,7 @@ export function Portfolio() {
                 </div>
 
                 {/* Conversion Footer in Modal */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-white/10 mt-4 pb-2">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6 md:pt-10 border-t border-white/10 mt-4 pb-2">
                   <div className="text-center sm:text-left">
                     <p className="text-sm text-neutral-300 mb-1 font-medium">
                       Interessado em resultados similares?

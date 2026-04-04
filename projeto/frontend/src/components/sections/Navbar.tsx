@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Menu, X, MessageSquare } from "lucide-react";
 import { WHATSAPP_DEFAULT_URL } from "@/lib/whatsapp";
 
@@ -52,8 +53,8 @@ export function Navbar() {
           className="text-white hover:text-[var(--lt-orange)] transition-colors flex items-center gap-3 group"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
-          <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-amber-500 rounded-sm flex items-center justify-center group-hover:shadow-lg group-hover:shadow-orange-500/20 transition-all duration-300">
-            <span className="text-black font-bold text-sm">L</span>
+          <div className="relative w-9 h-9 flex items-center justify-center transition-all duration-300">
+            <Image src="/logo-1-transparente.png" alt="Logos Tech" width={36} height={36} className="object-contain" />
           </div>
           <span className="text-sm font-semibold tracking-tight">
             Logos Tech

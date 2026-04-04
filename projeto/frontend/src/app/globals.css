@@ -425,3 +425,69 @@
     filter: none;
   }
 }
+
+/* ═══════════════════════════════════════════════════════
+   PREMIUM HUD EFFECTS
+   ═══════════════════════════════════════════════════════ */
+
+@keyframes hud-scanline {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 0.5; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(400px); opacity: 0; }
+}
+
+@keyframes holographic-glitch {
+  0% { clip-path: inset(10% 0 80% 0); transform: translate(-2px, 2px); }
+  20% { clip-path: inset(80% 0 10% 0); transform: translate(2px, -2px); }
+  40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, -2px); }
+  60% { clip-path: inset(90% 0 5% 0); transform: translate(2px, 2px); }
+  80% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 2px); }
+  100% { clip-path: inset(50% 0 30% 0); transform: translate(2px, -2px); }
+}
+
+.hud-container {
+  perspective: 1500px;
+  transform-style: preserve-3d;
+}
+
+.hud-card {
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.hud-scanline::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 15px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4), transparent);
+  animation: hud-scanline 4s linear infinite;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.hud-glitch-hover:hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  opacity: 0.5;
+  filter: blur(2px);
+  animation: holographic-glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  z-index: -1;
+}
+
+.text-cyan-glow { text-shadow: 0 0 10px rgba(6, 182, 212, 0.6); }
+.text-emerald-glow { text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
+
+.bg-grid-cyan {
+  background-image: linear-gradient(to right, rgba(6,182,212,0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(6,182,212,0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.bg-grid-emerald {
+  background-image: linear-gradient(to right, rgba(16,185,129,0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(16,185,129,0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}

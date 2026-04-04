@@ -26,7 +26,7 @@ export function ScrollReveal({ children, className = "", delay = 0 }: ScrollReve
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -5% 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px -20px 0px" }
     );
 
     observer.observe(el);

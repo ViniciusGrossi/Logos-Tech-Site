@@ -2,6 +2,7 @@
 
 import { Separator } from "@/components/ui/separator";
 import { ArrowUp } from "lucide-react";
+import Image from "next/image";
 
 const FOOTER_LINKS = [
   { href: "#servicos", label: "Serviços" },
@@ -22,8 +23,8 @@ export function Footer() {
           {/* Logo + tagline */}
           <div className="space-y-6 col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 group cursor-default">
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-500 rounded-sm flex items-center justify-center group-hover:shadow-lg group-hover:shadow-orange-500/20 transition-all duration-500">
-                <span className="text-black font-bold text-lg">L</span>
+              <div className="relative w-12 h-12 flex items-center justify-center group-hover:shadow-lg group-hover:shadow-orange-500/20 transition-all duration-500">
+                <Image src="/logo-1-transparente.png" alt="Logos Tech" width={48} height={48} className="object-contain" />
               </div>
               <div className="flex flex-col">
                 <span className="text-base font-bold text-white tracking-tight uppercase">

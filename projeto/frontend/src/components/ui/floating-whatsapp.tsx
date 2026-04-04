@@ -21,11 +21,11 @@ export function FloatingWhatsApp() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-3 pointer-events-none">
+    <div className="hidden md:flex fixed bottom-6 right-6 z-[100] flex-col items-end gap-3 pointer-events-none">
       {/* Tooltip / Prompt */}
       {showTooltip && (
         <div 
-          className="bg-black/90 backdrop-blur-xl border border-white/10 p-4 rounded-xl shadow-2xl max-w-[200px] pointer-events-auto animate-in fade-in slide-in-from-bottom-4 duration-500 relative"
+          className="hidden md:block bg-black/90 backdrop-blur-xl border border-white/10 p-4 rounded-xl shadow-2xl max-w-[200px] pointer-events-auto animate-in fade-in slide-in-from-bottom-4 duration-500 relative"
           style={{ animationFillMode: 'both' }}
         >
           <button 

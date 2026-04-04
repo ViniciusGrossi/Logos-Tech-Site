@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ArrowRight, MessageSquare } from "lucide-react";
+import { ArrowRight, MessageSquare, Network, Cpu, Bot } from "lucide-react";
+import Image from "next/image";
 import { WHATSAPP_DEFAULT_URL } from "@/lib/whatsapp";
 import { GradientText } from "@/components/ui/gradient-text";
 
 export function Hero() {
   const wordsRef = useRef<HTMLDivElement>(null);
+  const hudContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!wordsRef.current) return;
@@ -42,6 +44,53 @@ export function Hero() {
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
+  }, []);
+
+  // HUD Parallax effect
+  useEffect(() => {
+    const container = hudContainerRef.current;
+    if (!container) return;
+
+    let rafId: number;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+      const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+      targetX = x * 15; 
+      targetY = y * 15;
+    };
+
+    const animate = () => {
+      currentX += (targetX - currentX) * 0.1;
+      currentY += (targetY - currentY) * 0.1;
+
+      const cards = container.querySelectorAll('.hud-card');
+      cards.forEach((card, index) => {
+        const el = card as HTMLElement;
+        const depth = index === 0 ? 1 : index === 1 ? 0.6 : 0.4;
+        
+        const baseRotateX = index === 0 ? -2 : index === 1 ? -6 : 3;
+        const baseRotateY = index === 0 ? 0 : index === 1 ? 2 : -2;
+        
+        el.style.transform = `rotateY(${baseRotateY + currentX * depth}deg) rotateX(${baseRotateX - currentY * depth}deg) translateZ(${depth * 30}px)`;
+      });
+
+      rafId = requestAnimationFrame(animate);
+    };
+
+    container.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('mouseleave', () => { targetX = 0; targetY = 0; });
+    rafId = requestAnimationFrame(animate);
+
+    return () => {
+      container.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
@@ -161,50 +210,113 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right: Floating Cards with enhanced depth */}
+        {/* Right: Holographic HUD */}
         <div
-          className="lg:col-span-5 relative h-[380px] md:h-[450px] lg:h-auto flex items-center justify-center animate-on-scroll order-first lg:order-last"
+          ref={hudContainerRef}
+          className="lg:col-span-5 relative h-[400px] md:h-[500px] lg:h-auto flex items-center justify-center animate-on-scroll order-first lg:order-last hud-container group cursor-crosshair pb-12 lg:pb-0"
           style={{
             animation: "fadeSlideIn 0.8s ease-out 1s both",
-            perspective: "1000px",
           }}
         >
-          {/* Main card */}
-          <div className="relative z-10 w-56 md:w-64 aspect-[4/5] bg-neutral-900 border border-white/10 shadow-2xl floating-card transform rotate-[-2deg] electric-glow">
-            <div className="w-full h-full bg-gradient-to-br from-orange-500/10 via-transparent to-amber-500/5 flex flex-col items-center justify-center gap-4">
-              <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-amber-500 rounded-sm flex items-center justify-center shadow-lg shadow-orange-500/20">
-                <span className="text-black font-bold text-3xl">L</span>
+          {/* HUD Target Crosshairs */}
+          <div className="absolute top-10 left-10 w-4 h-4 border-t-2 border-l-2 border-orange-500/30 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute top-10 right-10 w-4 h-4 border-t-2 border-r-2 border-orange-500/30 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute bottom-10 left-10 w-4 h-4 border-b-2 border-l-2 border-orange-500/30 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute bottom-10 right-10 w-4 h-4 border-b-2 border-r-2 border-orange-500/30 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+          {/* Central Card (IA) */}
+          <div className="relative z-30 w-56 md:w-64 aspect-[4/5] bg-black/80 border border-orange-500/30 shadow-[0_0_50px_rgba(249,115,22,0.15)] hud-card transform rotate-[-2deg] hud-glitch-hover overflow-hidden rounded-sm backdrop-blur-md">
+            <div className="hud-scanline absolute inset-0" />
+            <div className="w-full h-full bg-gradient-to-br from-orange-500/10 via-transparent to-amber-500/5 flex flex-col items-center justify-center gap-4 relative z-10">
+              <div className="absolute top-4 left-4 flex gap-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+                <div className="w-1.5 h-1.5 rounded-full bg-orange-500/40" />
               </div>
-              <span className="text-xs font-mono uppercase text-neutral-500 tracking-widest">
-                Logos Tech
+              <div className="absolute top-4 right-4 text-[9px] font-mono text-orange-400 opacity-70">
+                SYS.AI.01
+              </div>
+              
+              <div className="w-20 h-20 border border-orange-500/40 rounded-sm flex items-center justify-center shadow-[0_0_30px_rgba(249,115,22,0.3)] relative group-hover:border-orange-500 transition-colors bg-gradient-to-br from-orange-500/10 to-amber-500/20">
+                <div className="absolute inset-0 bg-orange-500/10 animate-ping opacity-20" />
+                <Image src="/logo-1-transparente.png" alt="Logos Tech" width={56} height={56} className="object-contain drop-shadow-[0_0_10px_rgba(249,115,22,0.8)] relative z-10" />
+              </div>
+              
+              <span className="text-[10px] font-mono font-bold text-orange-500 tracking-[0.3em] group-hover:text-white transition-colors uppercase">
+                [SYSTEM_READY]
               </span>
+              
+              <div className="absolute bottom-6 w-full px-6 flex justify-between items-end opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="flex flex-col gap-1">
+                  <span className="text-[8px] text-neutral-500 font-mono">CORE_NET</span>
+                  <div className="flex gap-1">
+                    <span className="inline-block w-6 h-1 bg-orange-500 shadow-[0_0_8px_#F97316]" />
+                    <span className="inline-block w-2 h-1 bg-orange-500/50" />
+                  </div>
+                </div>
+                <Cpu className="w-4 h-4 text-orange-500" />
+              </div>
             </div>
-            <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-sm px-3 py-1 border border-white/10">
-              <span className="text-[10px] font-mono uppercase text-white">
-                v2.0
-              </span>
+            {/* Corner accents */}
+            <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-orange-500/50 -translate-x-1 translate-y-1" />
+            <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-orange-500/50 translate-x-1 -translate-y-1" />
+          </div>
+
+          {/* Left Card (Automation) - Cyan */}
+          <div className="absolute top-[5%] left-[5%] md:left-[0%] lg:-left-[10%] w-40 md:w-48 aspect-square bg-black/80 border border-cyan-500/30 shadow-[0_0_30px_rgba(6,182,212,0.1)] hud-card z-20 transform -rotate-6 rotate-y-[2deg] overflow-hidden rounded-sm backdrop-blur-sm hud-glitch-hover group/cyan">
+            <div className="hud-scanline absolute inset-0" style={{animationDelay: '-1.5s'}} />
+            <div className="w-full h-full bg-grid-cyan flex flex-col p-4 relative z-10">
+              <span className="text-[9px] font-mono text-cyan-400 opacity-80 mb-auto">AUT.WORKFLOWS</span>
+              
+              <div className="flex justify-center items-center gap-2 md:gap-3 my-auto">
+                <div className="p-2 bg-cyan-950/50 border border-cyan-500/40 rounded flex items-center justify-center group-hover/cyan:bg-cyan-900/50 transition-colors">
+                  <Network className="w-4 h-4 md:w-5 md:h-5 text-cyan-400" />
+                </div>
+                <div className="h-[1px] w-4 bg-cyan-500/50 relative">
+                  <div className="absolute top-0 left-0 h-full w-2 bg-cyan-400 animate-pulse-slow" />
+                </div>
+                <div className="p-2 bg-cyan-950/50 border border-cyan-500/40 rounded flex items-center justify-center group-hover/cyan:bg-cyan-900/50 transition-colors">
+                  <span className="text-cyan-400 font-mono text-[10px] md:text-xs font-bold">n8n</span>
+                </div>
+              </div>
+
+              <div className="flex justify-between items-end mt-auto">
+                <span className="text-[9px] md:text-[10px] font-mono text-cyan-500 font-bold group-hover/cyan:text-cyan-300 transition-colors">
+                  [SYNCING]
+                </span>
+                <span className="text-[8px] font-mono text-cyan-400 border border-cyan-500/30 px-1">PYTHON</span>
+              </div>
             </div>
           </div>
 
-          {/* Background card 1 */}
-          <div className="absolute top-[10%] left-[5%] w-32 md:w-40 aspect-square bg-neutral-900 border border-white/10 shadow-xl floating-card z-0 transform -rotate-6">
-            <div className="w-full h-full bg-gradient-to-t from-orange-900/20 to-transparent" />
-          </div>
+          {/* Right Card (Data/AI) - Emerald */}
+          <div className="absolute bottom-[2%] right-[5%] md:right-[0%] lg:-right-[5%] w-44 md:w-52 aspect-[4/3] bg-black/80 border border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.1)] hud-card z-10 transform rotate-3 rotate-y-[-2deg] overflow-hidden rounded-sm backdrop-blur-sm hud-glitch-hover group/em">
+            <div className="hud-scanline absolute inset-0" style={{animationDelay: '-2s'}} />
+            <div className="w-full h-full bg-grid-emerald flex flex-col p-4 relative z-10">
+              <div className="flex justify-between mb-auto">
+                <span className="text-[9px] font-mono text-emerald-400 opacity-80">DT.INTELLIGENCE</span>
+                <div className="flex gap-1 items-end">
+                  <div className="w-1 h-2 bg-emerald-500/30 animate-pulse" />
+                  <div className="w-1 h-3 bg-emerald-500/60 animate-pulse" style={{animationDelay: '100ms'}} />
+                  <div className="w-1 h-4 bg-emerald-500 animate-pulse" style={{animationDelay: '200ms'}} />
+                </div>
+              </div>
+              
+              <div className="text-center my-auto transform group-hover/em:scale-105 transition-transform duration-300">
+                <div className="text-2xl md:text-3xl font-mono text-emerald-400 font-bold tracking-tighter text-emerald-glow">
+                  3.5x
+                </div>
+                <div className="text-[8px] font-mono text-emerald-500/70 mt-1 uppercase tracking-widest">
+                  ROI Tracker
+                </div>
+              </div>
 
-          {/* Background card 2 */}
-          <div className="absolute bottom-[15%] right-[5%] w-36 md:w-48 aspect-square bg-neutral-900 border border-white/10 shadow-xl floating-card z-20 transform rotate-3">
-            <div className="w-full h-full bg-gradient-to-bl from-amber-900/20 to-transparent" />
+              <div className="flex items-center gap-2 mt-auto pt-2 border-t border-emerald-500/20">
+                <Bot className="w-3 h-3 text-emerald-500" />
+                <span className="text-[7.5px] font-mono text-emerald-400">Claude · OpenAI</span>
+              </div>
+            </div>
           </div>
-
-          {/* New: Small floating accent */}
-          <div
-            className="absolute top-[5%] right-[20%] w-4 h-4 bg-orange-500/30 rounded-full z-30"
-            style={{ animation: "float 6s ease-in-out infinite" }}
-          />
-          <div
-            className="absolute bottom-[10%] left-[15%] w-2 h-2 bg-amber-400/40 rounded-full z-30"
-            style={{ animation: "float 8s ease-in-out infinite 1s" }}
-          />
+          
         </div>
       </main>
 

@@ -3,9 +3,9 @@
 # Mantenha enxuto — cada linha aqui custa tokens em todo prompt.
 
 ## Projeto
-- **Nome:** [Nome do Projeto]
+- **Nome:** Site Logos Tech
 - **Stack:** [Backend] + [Frontend] + Supabase + [Automação] + [IA]
-- **Fase atual:** [MVP / Fase 2 / ...]
+- **Fase atual:** MVP
 
 ## Regras globais
 As regras de arquitetura, código e padrões estão em `GLOBAL-RULES.md`.
@@ -24,7 +24,7 @@ Tokens definidos em `docs/design-system.md`.
 Nunca inventar cor, espaçamento ou tipografia durante o build — usar apenas os tokens.
 
 ## Contexto de negócio
-[Descreva em 2-3 frases o que o sistema faz e para quem.]
+Site/Landing Page da empresa Logos Tech, com foco em capturar leads através de botões de WhatsApp. O site deve ser responsivo e otimizado para SEO. Nele apresentaria toda a minha empresa, os serviços que ofereço, os módulos que tenho, meu portfolio, etc. O site deve ser moderno e atraente, com um design clean e profissional. O site deve ser rápido e leve, com um bom score no Google PageSpeed Insights.
 
 ## O que NÃO fazer
 - Não criar arquivos fora da estrutura de pastas definida
