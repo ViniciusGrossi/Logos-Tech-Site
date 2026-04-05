@@ -43,7 +43,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full bg-[#050505] text-[#E6E1D7] overflow-x-hidden selection:bg-orange-500/30">
-        {children}
+        <div className="overflow-x-hidden w-full relative flex flex-col min-h-screen">
+          {children}
+        </div>
       </body>
     </html>
   );
