@@ -18,24 +18,35 @@ export function Navbar() {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    
     const onScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (timeoutId) return;
+      
+      timeoutId = setTimeout(() => {
+        setScrolled(window.scrollY > 20);
 
-      // Detect active section
-      const sections = NAV_LINKS.map((l) => l.href.replace("#", ""));
-      for (const id of [...sections].reverse()) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120) {
-            setActiveSection(id);
-            break;
+        // Detect active section safely (avoiding layout thrashing every ms)
+        const sections = NAV_LINKS.map((l) => l.href.replace("#", ""));
+        for (const id of [...sections].reverse()) {
+          const el = document.getElementById(id);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 120) {
+              setActiveSection(id);
+              break;
+            }
           }
         }
-      }
+        timeoutId = undefined as any;
+      }, 50); // 50ms throttle
     };
+    
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
   return (
@@ -54,7 +65,7 @@ export function Navbar() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           <div className="relative w-9 h-9 flex items-center justify-center transition-all duration-300">
-            <Image src="/logo-1-transparente.png" alt="Logos Tech" width={36} height={36} className="object-contain" />
+            <Image src="/logo-1-transparente.png" alt="Logos Tech" width={36} height={36} className="object-contain" priority />
           </div>
           <span className="text-sm font-semibold tracking-tight">
             Logos Tech

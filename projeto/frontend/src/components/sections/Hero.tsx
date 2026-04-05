@@ -22,31 +22,8 @@ export function Hero() {
     });
   }, []);
 
-  // Click ripple effect
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      const ripple = document.createElement("div");
-      Object.assign(ripple.style, {
-        position: "fixed",
-        left: `${e.clientX}px`,
-        top: `${e.clientY}px`,
-        width: "4px",
-        height: "4px",
-        background: "rgba(249,115,22,0.6)",
-        borderRadius: "50%",
-        transform: "translate(-50%, -50%)",
-        pointerEvents: "none",
-        zIndex: "9999",
-        animation: "pulse-glow 1s ease-out forwards",
-      });
-      document.body.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 1000);
-    };
-    document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
-  }, []);
 
-  // HUD Parallax effect
+  // HUD Parallax effect — pauses when off-screen (performance win)
   useEffect(() => {
     const container = hudContainerRef.current;
     if (!container) return;
@@ -56,6 +33,7 @@ export function Hero() {
     let targetY = 0;
     let currentX = 0;
     let currentY = 0;
+    let isVisible = true;
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
@@ -66,6 +44,10 @@ export function Hero() {
     };
 
     const animate = () => {
+      if (!isVisible) {
+        rafId = requestAnimationFrame(animate);
+        return;
+      }
       currentX += (targetX - currentX) * 0.1;
       currentY += (targetY - currentY) * 0.1;
 
@@ -83,6 +65,13 @@ export function Hero() {
       rafId = requestAnimationFrame(animate);
     };
 
+    // Pause RAF when hero scrolls off screen
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisible = entry.isIntersecting; },
+      { threshold: 0 }
+    );
+    observer.observe(container);
+
     container.addEventListener('mousemove', handleMouseMove);
     container.addEventListener('mouseleave', () => { targetX = 0; targetY = 0; });
     rafId = requestAnimationFrame(animate);
@@ -90,6 +79,7 @@ export function Hero() {
     return () => {
       container.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(rafId);
+      observer.disconnect();
     };
   }, []);
 
@@ -238,7 +228,7 @@ export function Hero() {
               
               <div className="w-20 h-20 border border-orange-500/40 rounded-sm flex items-center justify-center shadow-[0_0_30px_rgba(249,115,22,0.3)] relative group-hover:border-orange-500 transition-colors bg-gradient-to-br from-orange-500/10 to-amber-500/20">
                 <div className="absolute inset-0 bg-orange-500/10 animate-ping opacity-20" />
-                <Image src="/logo-1-transparente.png" alt="Logos Tech" width={56} height={56} className="object-contain drop-shadow-[0_0_10px_rgba(249,115,22,0.8)] relative z-10" />
+                <Image src="/logo-1-transparente.png" alt="Logos Tech" width={56} height={56} className="object-contain drop-shadow-[0_0_10px_rgba(249,115,22,0.8)] relative z-10" priority />
               </div>
               
               <span className="text-[10px] font-mono font-bold text-orange-500 tracking-[0.3em] group-hover:text-white transition-colors uppercase">
