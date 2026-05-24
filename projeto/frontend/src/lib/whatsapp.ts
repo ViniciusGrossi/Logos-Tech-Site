@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "5500000000000"; // TODO: replace with real number
+const WHATSAPP_NUMBER = "5561982065761"; // Logos Tech Official
 
 interface WhatsAppOptions {
   source?: string;
@@ -7,9 +7,9 @@ interface WhatsAppOptions {
   utm_campaign?: string;
 }
 
-export function buildWhatsAppUrl(options: WhatsAppOptions = {}): string {
+export function buildWhatsAppUrl(options: WhatsAppOptions = {}, customText?: string): string {
   const message = encodeURIComponent(
-    "Olá! Gostaria de um diagnóstico gratuito para entender como a IA pode ajudar meu negócio."
+    customText || "Olá! Gostaria de um diagnóstico gratuito para entender como a IA pode ajudar meu negócio."
   );
 
   const params = new URLSearchParams();

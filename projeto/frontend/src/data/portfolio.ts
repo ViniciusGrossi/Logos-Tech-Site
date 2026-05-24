@@ -57,7 +57,7 @@ export const projects: PortfolioProject[] = [
     sector: 'E-commerce Analytics',
     description: 'Pipeline completo ponta a ponta: extração de Data Lake (S3), orquestração dbt e Gold Layer Data Marts.',
     image: '/portfolio/Data-Warehouse-1.png',
-    tags: ['dbt', 'Supabase', 'Python', 'Vibe Coding', 'Chart.js'],
+    tags: ['dbt', 'Supabase', 'Python', 'Data Engineering', 'Chart.js'],
     link: '#demo-dw',
     challenge: "Dados fragmentados em planilhas e sistemas de E-commerce dificultavam a tomada de decisão estratégica sobre precificação e estoque. A falta de uma 'única fonte da verdade' gerava relatórios conflitantes entre os times.",
     solution: "Implementação da Arquitetura Medalhão (Bronze/Silver/Gold). Utilizamos dbt para modelagem dimensional e Supabase como storage analítico. Criamos Data Marts dedicados para Sales, Customer Success e Pricing, consumíveis via dashboards 'GSAP-animated'.",
@@ -99,23 +99,6 @@ export const projects: PortfolioProject[] = [
       "Redução de 50% no tempo de abertura de OS.",
       "Controle de estoque 100% digital e integrado.",
       "Aumento na satisfação do cliente com notificações automáticas."
-    ]
-  },
-  {
-    id: 'gas-price',
-    title: 'Gas Price Brazil',
-    category: 'Data BI / ML',
-    sector: 'Economia',
-    description: 'Hub analítico para visualização de preços de combustíveis com predição ML.',
-    image: '/portfolio/Gas-Price-Brazil-1.png',
-    tags: ['Machine Learning', 'Recharts', 'API SGS', 'BI'],
-    link: 'https://gas-price-brazil.vercel.app',
-    challenge: "A volatilidade dos preços de combustíveis no Brasil impacta toda a cadeia logística. Faltava uma ferramenta simples para cruzar dados da ANP com indicadores globais (Brent/Dólar) para prever tendências locais.",
-    solution: "Pipeline de dados que consome APIs governamentais e financeiras. Algoritmos de Machine Learning realizam a detecção de anomalias e predição de curto prazo para auxiliar empresas de transporte no planejamento de combustível.",
-    results: [
-      "Acurácia de 85% na predição de tendência de semanal.",
-      "Mais de 1 milhão de pontos de dados processados.",
-      "Visualização interativa para dashboards executivos."
     ]
   }
 ];

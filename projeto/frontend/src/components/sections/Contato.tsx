@@ -50,7 +50,7 @@ export function Contato() {
             Contato
           </span>
 
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white tracking-tight mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight mb-6">
             Tem um problema para{" "}
             <GradientText shimmer>resolver</GradientText>?
           </h2>

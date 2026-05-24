@@ -52,7 +52,7 @@ export function StackTech() {
           <span className="text-xs font-mono text-[var(--lt-orange)] uppercase tracking-widest block mb-4">
             Tecnologia
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white tracking-tight mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight mb-4">
             Stack
           </h2>
           <p className="text-base md:text-lg text-neutral-400 max-w-2xl leading-relaxed font-light">

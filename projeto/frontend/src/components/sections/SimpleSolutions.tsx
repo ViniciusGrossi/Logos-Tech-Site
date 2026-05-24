@@ -42,7 +42,7 @@ export function SimpleSolutions() {
           <span className="text-xs font-mono text-[var(--lt-orange)] uppercase tracking-widest block mb-4">
             Simplicidade no centro
           </span>
-          <h2 className="text-3xl md:text-5xl font-normal text-white tracking-tight mb-4">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-white tracking-tight mb-4">
             Soluções que qualquer um entende
           </h2>
           <p className="text-base md:text-lg text-neutral-400 max-w-2xl font-light leading-relaxed">

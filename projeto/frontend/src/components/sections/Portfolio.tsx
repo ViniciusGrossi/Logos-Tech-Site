@@ -10,19 +10,23 @@ import { ExternalLink, Play, X, ArrowRight, CheckCircle2, MessageSquare } from "
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 export function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
 
+
   const handleOpenWhatsApp = (project: PortfolioProject) => {
     const text = `Olá! Vi o projeto ${project.title} no site da Logos Tech e gostaria de um diagnóstico gratuito para minha empresa sobre soluções similares.`;
-    window.open(`https://wa.me/5500000000000?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(buildWhatsAppUrl({
+      source: "site",
+      utm_source: "site",
+      utm_medium: "cta",
+      utm_campaign: "portfolio"
+    }, text), "_blank");
   };
 
   return (
@@ -35,7 +39,7 @@ export function Portfolio() {
           <span className="text-xs font-mono text-[var(--lt-orange)] uppercase tracking-widest block mb-4">
             Portfólio
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white tracking-tight mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight mb-4">
             Projetos
           </h2>
           <p className="text-base md:text-lg text-neutral-400 max-w-2xl leading-relaxed font-light">
@@ -111,12 +115,21 @@ export function Portfolio() {
                         {project.title}
                       </h3>
 
-                      <p className="text-sm text-neutral-400 leading-relaxed mb-6 flex-1">
+                      <p className="text-sm text-neutral-400 leading-relaxed mb-4">
                         {project.description}
                       </p>
 
+                      {project.results && project.results.length > 0 && (
+                        <div className="mb-6 flex items-start gap-2 bg-[var(--lt-orange)]/5 p-2 rounded-sm border border-[var(--lt-orange)]/10">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[var(--lt-orange)] shrink-0 mt-0.5" />
+                          <span className="text-xs text-neutral-300 font-medium leading-snug">
+                            {project.results[0]}
+                          </span>
+                        </div>
+                      )}
+
                       {/* Tags chips with staggered hover */}
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2 mt-auto">
                         {project.tags.map((tech, j) => (
                           <Badge
                             key={tech}

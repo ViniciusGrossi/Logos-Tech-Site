@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import SmoothScrolling from "@/components/SmoothScrolling";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
-const inter = Inter({
-  variable: "--font-inter",
+const outfit = Outfit({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-serif",
   subsets: ["latin"],
   display: "swap",
 });
@@ -41,11 +49,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} h-full antialiased`}>
+    <html
+      lang="pt-BR"
+      className={`${outfit.variable} ${playfair.variable} h-full antialiased`}
+    >
       <body className="min-h-full bg-[#050505] text-[#E6E1D7] overflow-x-hidden selection:bg-orange-500/30">
-        <div className="overflow-x-hidden w-full relative flex flex-col min-h-screen">
-          {children}
-        </div>
+        <TooltipProvider>
+          <SmoothScrolling>
+            <div className="overflow-x-hidden w-full relative flex flex-col min-h-screen">
+              {children}
+            </div>
+          </SmoothScrolling>
+        </TooltipProvider>
       </body>
     </html>
   );

@@ -66,20 +66,12 @@ export function Footer() {
             </span>
             <div className="flex flex-col gap-3">
               <a
-                href="https://instagram.com/logostech"
+                href="https://www.instagram.com/_logos_tech/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-500 hover:text-white transition-colors text-sm"
               >
                 Instagram
-              </a>
-              <a
-                href="https://linkedin.com/company/logostech"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-neutral-500 hover:text-white transition-colors text-sm"
-              >
-                LinkedIn
               </a>
               <div className="pt-4 space-y-2">
                 <span className="text-[10px] font-mono text-neutral-700 uppercase tracking-widest block">

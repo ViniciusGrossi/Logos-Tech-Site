@@ -93,7 +93,7 @@ export function Hero() {
         <div className="lg:col-span-7 flex flex-col justify-center z-20 relative pt-10 lg:pt-0">
           {/* Tagline */}
           <div className="text-center lg:text-left mb-8">
-            <h2 className="text-xs font-mono font-light uppercase tracking-[0.2em] text-neutral-400">
+            <h2 className="text-xs font-mono font-light uppercase tracking-[0.2em] text-neutral-500">
               <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="0">
                 Desenvolvimento
               </span>
@@ -107,44 +107,41 @@ export function Hero() {
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-[5.5rem] leading-[0.9] text-white font-medium tracking-tighter mb-8 text-center lg:text-left">
+          <h1 className="text-4xl md:text-6xl lg:text-[5.5rem] leading-[0.9] text-white font-serif font-bold tracking-tighter mb-8 text-center lg:text-left">
             <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="600">
-              <GradientText shimmer>Sistemas</GradientText>
+              <GradientText shimmer>Resolvemos</GradientText>
             </span>
             <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="800">
-              com
+              problemas
             </span>
             <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="1000">
-              <GradientText shimmer>IA</GradientText>
+              latentes
             </span>
             <br className="hidden lg:block" />
-            <span className="word inline-block opacity-0 mr-[0.3em] text-neutral-600" data-delay="1200">
-              integrada,
+            <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="1200">
+              de
             </span>
             <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="1400">
-              feitos
+              negócios
+            </span>
+            <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="1600">
+              com
             </span>
             <br className="hidden lg:block" />
-            <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="1600">
-              para
-            </span>
             <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="1800">
-              o
+              <GradientText shimmer>Inteligência</GradientText>
             </span>
-            <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="2000">
-              seu
-            </span>
-            <span className="word inline-block opacity-0" data-delay="2200">
-              <GradientText shimmer>negócio.</GradientText>
+            <span className="word inline-block opacity-0" data-delay="2000">
+              <GradientText shimmer>Artificial.</GradientText>
             </span>
           </h1>
 
           {/* Subtitle */}
           <p
-            className="text-base md:text-lg text-neutral-400 max-w-xl leading-relaxed mb-12 font-light text-center lg:text-left animate-on-scroll"
+            className="text-base md:text-lg text-neutral-400 max-w-xl leading-relaxed mb-12 font-light text-center lg:text-left font-sans animate-on-scroll"
             style={{ animation: "fadeSlideIn 0.8s ease-out 2.6s both" }}
           >
-            Não sabe se a IA serve para você? Nosso <span className="text-white font-medium">Agente Especialista</span> está pronto para analisar seu negócio e entregar um diagnóstico completo, do briefing ao deploy.
+            Transforme tarefas manuais em automações que trabalham 24/7. Nosso <span className="text-white font-medium">Agente Especialista</span> está pronto para analisar sua empresa e entregar um diagnóstico gratuito.
           </p>
 
           {/* CTAs */}
