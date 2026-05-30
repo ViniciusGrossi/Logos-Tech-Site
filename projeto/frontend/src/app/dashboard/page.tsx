@@ -125,10 +125,8 @@ export default function DashboardPage() {
         <div className="flex items-center gap-4">
           {/* Mobile Menu Trigger */}
           <Sheet>
-            <SheetTrigger asChild>
-              <button className="lg:hidden p-2 -ml-2 text-neutral-400 hover:text-white transition-colors">
-                <Menu className="w-5 h-5" />
-              </button>
+            <SheetTrigger className="lg:hidden p-2 -ml-2 text-neutral-400 hover:text-white transition-colors">
+              <Menu className="w-5 h-5" />
             </SheetTrigger>
             <SheetContent side="left" className="bg-[#09090B] border-r border-white/10 p-6 w-[300px]">
               <div className="mt-8">
