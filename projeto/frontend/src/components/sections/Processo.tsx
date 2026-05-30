@@ -6,27 +6,27 @@ import { Zap } from "lucide-react";
 const steps = [
   {
     number: "01",
-    title: "Diagnóstico IA (Grátis)",
+    title: "Diagnóstico Gratuito",
     description:
-      "Conversa técnica para mapear gargalos e definir o PRD (Product Requirements Document) inicial do seu ecossistema modular.",
+      "Conversamos para entender o que trava sua operação hoje. Você sai com um mapa claro do que será construído e por que.",
   },
   {
     number: "02",
     title: "Arquitetura & Design",
     description:
-      "Definição da stack (Next.js, Supabase, n8n) e criação do Design System. Decidimos a base técnica antes de escrever a primeira linha de código.",
+      "Escolhemos as ferramentas certas para o seu caso — não para impressionar, mas para que o sistema seja fácil de manter e escalar depois.",
   },
   {
     number: "03",
-    title: "Build Assistido por IA",
+    title: "Build Acelerado",
     description:
-      "Uso de engenharia de prompts e agentes de codificação (Antigravity) para acelerar o desenvolvimento, garantindo testes rigorosos e clean code.",
+      "Desenvolvemos mais rápido usando IA como copiloto interno. Isso reduz custo e garante entrega no prazo combinado.",
   },
   {
     number: "04",
-    title: "Deploy & RAG Native",
+    title: "Deploy & Entrega",
     description:
-      "Lançamento em ambiente Edge com documentação técnica RAG-ready, permitindo que o sistema seja consultado e operado por IAs desde o dia 1.",
+      "Colocamos no ar, treinamos seu time e entregamos documentação completa. O sistema é seu — e fica escalável desde o início.",
   },
 ];
 

@@ -30,10 +30,10 @@ export function UseCases() {
       <ScrollReveal>
         <div className="text-center mb-16">
           <span className="text-xs font-mono text-[var(--lt-orange)] uppercase tracking-widest block mb-4">
-            Cenários de Uso
+            Você se identifica com algum desses?
           </span>
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-white tracking-tight mb-4">
-            A IA serve para o seu negócio?
+            Três sinais de que você precisa de automação
           </h2>
           <p className="text-base md:text-lg text-neutral-400 max-w-2xl mx-auto font-light leading-relaxed">
             Se você se identifica com algum desses problemas, <span className="text-white">a resposta é sim.</span>

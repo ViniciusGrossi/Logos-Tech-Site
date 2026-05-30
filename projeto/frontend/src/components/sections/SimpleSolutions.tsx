@@ -40,13 +40,13 @@ export function SimpleSolutions() {
       <ScrollReveal>
         <div className="mb-16">
           <span className="text-xs font-mono text-[var(--lt-orange)] uppercase tracking-widest block mb-4">
-            Simplicidade no centro
+            Para quem não quer aprender tecnologia, quer resultado
           </span>
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-white tracking-tight mb-4">
             Soluções que qualquer um entende
           </h2>
           <p className="text-base md:text-lg text-neutral-400 max-w-2xl font-light leading-relaxed">
-            IA não precisa ser complicada. Nós pegamos a tecnologia mais avançada do mundo e entregamos algo <span className="text-white">prático</span> para o seu dia a dia.
+            Pegamos a tecnologia mais avançada do mundo e traduzimos para um sistema que qualquer pessoa da sua equipe consegue usar <span className="text-white">no primeiro dia</span>.
           </p>
         </div>
       </ScrollReveal>

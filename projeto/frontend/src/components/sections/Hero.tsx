@@ -110,30 +110,30 @@ export function Hero() {
           {/* Main Headline */}
           <h1 className="text-4xl md:text-6xl lg:text-[5.5rem] leading-[0.92] text-white font-serif font-bold tracking-[-0.03em] mb-8 text-center lg:text-left">
             <span className="word inline-block opacity-0 mr-[0.3em]">
-              <GradientText shimmer>Resolvemos</GradientText>
+              Seu
             </span>
             <span className="word inline-block opacity-0 mr-[0.3em]">
-              problemas
+              negócio
             </span>
             <span className="word inline-block opacity-0 mr-[0.3em]">
-              reais
-            </span>
-            <br className="hidden lg:block" />
-            <span className="word inline-block opacity-0 mr-[0.3em]">
-              de
-            </span>
-            <span className="word inline-block opacity-0 mr-[0.3em]">
-              negócios
-            </span>
-            <span className="word inline-block opacity-0 mr-[0.3em]">
-              com
+              perde
             </span>
             <br className="hidden lg:block" />
             <span className="word inline-block opacity-0 mr-[0.3em]">
-              <GradientText shimmer>Inteligência</GradientText>
+              dinheiro
+            </span>
+            <span className="word inline-block opacity-0 mr-[0.3em]">
+              em
+            </span>
+            <span className="word inline-block opacity-0 mr-[0.3em]">
+              <GradientText shimmer>trabalho</GradientText>
+            </span>
+            <br className="hidden lg:block" />
+            <span className="word inline-block opacity-0 mr-[0.3em]">
+              <GradientText shimmer>manual.</GradientText>
             </span>
             <span className="word inline-block opacity-0">
-              <GradientText shimmer>Artificial.</GradientText>
+              A gente resolve.
             </span>
           </h1>
 
@@ -142,7 +142,7 @@ export function Hero() {
             className="text-base md:text-lg text-neutral-400 max-w-xl leading-relaxed mb-12 font-light text-center lg:text-left font-sans"
             style={{ animation: "fadeSlideIn 0.65s cubic-bezier(0.16,1,0.3,1) 1.1s both" }}
           >
-            Transforme tarefas manuais em automações que trabalham 24/7. Nosso <span className="text-white font-medium">Agente Especialista</span> está pronto para analisar sua empresa e entregar um diagnóstico gratuito.
+            Você descreve o problema. A gente entrega o sistema que resolve — em até 6 semanas. Comece com um <span className="text-white font-medium">diagnóstico gratuito</span>.
           </p>
 
           {/* CTAs */}
@@ -166,7 +166,7 @@ export function Hero() {
               <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-orange-500 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-1 -translate-y-1 group-hover:translate-x-0 group-hover:translate-y-0" />
               <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-orange-500 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 translate-y-1 group-hover:translate-x-0 group-hover:translate-y-0" />
               <span className="btn flex items-center gap-3 bg-transparent text-white font-medium uppercase tracking-wider text-sm relative z-10">
-                Ver portfólio
+                Ver resultados
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </a>

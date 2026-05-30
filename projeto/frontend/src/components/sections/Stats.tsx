@@ -4,10 +4,10 @@ import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 const stats = [
-  { value: 80, suffix: "%", label: "Redução em tarefas manuais" },
-  { value: 3, suffix: ".5x", label: "ROI médio por projeto" },
-  { value: 6, suffix: " sem", label: "Da ideia ao deploy" },
-  { value: 24, suffix: "/7", label: "Operação sem pausa" },
+  { value: 80, suffix: "%", label: "menos trabalho manual para os times" },
+  { value: 3, suffix: ".5x", label: "de retorno médio por projeto" },
+  { value: 6, suffix: " sem", label: "do briefing ao sistema no ar" },
+  { value: 24, suffix: "/7", label: "seus agentes funcionando" },
 ];
 
 export function Stats() {
@@ -25,6 +25,9 @@ export function Stats() {
       />
 
       <div className="max-w-[90rem] mx-auto">
+        <p className="text-center text-xs font-mono text-neutral-600 uppercase tracking-widest mb-8">
+          Médias dos projetos entregues nos últimos 12 meses
+        </p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, i) => (
             <ScrollReveal key={stat.label} delay={i * 100}>

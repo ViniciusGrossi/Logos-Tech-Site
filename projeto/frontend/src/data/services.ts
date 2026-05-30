@@ -11,9 +11,9 @@ export interface Service {
 export const services: Service[] = [
   {
     icon: Monitor,
-    title: "Systems",
+    title: "Sistemas sob Medida",
     description:
-      "Core Operacional: Desenvolvemos o sistema exato que sua empresa precisa para rodar sem atritos, de ERPs enxutos a CRMs territoriais.",
+      "Desenvolvemos o sistema exato que sua empresa precisa: do CRM ao ERP, sem as funcionalidades que você nunca vai usar e sem o preço de uma grande consultoria.",
     examples: [
       "Plataformas SaaS White-label",
       "Sistemas de Gestão (ERP)",
@@ -23,9 +23,9 @@ export const services: Service[] = [
   },
   {
     icon: Zap,
-    title: "Automations",
+    title: "Automação com IA",
     description:
-      "IA & Workflows: Eliminamos o trabalho manual repetitivo integrando ferramentas e injetando inteligência artificial em cada etapa do processo.",
+      "Eliminamos o trabalho manual que consome seu time: agentes de IA que atendem clientes, aprovam pedidos e enviam relatórios — sem você precisar tocar em nada.",
     examples: [
       "Agentes de IA 24/7 (WhatsApp)",
       "Workflows n8n Complexos",
@@ -35,9 +35,9 @@ export const services: Service[] = [
   },
   {
     icon: BarChart3,
-    title: "Analytics",
+    title: "Dados e Dashboards",
     description:
-      "Dados & Inteligência: Transformamos dados em decisões. Criamos a infraestrutura para você enxergar o motor do seu negócio em tempo real.",
+      "Seus dados já estão lá. A gente os transforma em um painel que mostra em tempo real onde seu negócio está ganhando e onde está perdendo dinheiro.",
     examples: [
       "Data Warehouses (Supabase/Postgres)",
       "Dashboards Executivos",
@@ -47,9 +47,9 @@ export const services: Service[] = [
   },
   {
     icon: Sparkles,
-    title: "Growth",
+    title: "Crescimento Digital",
     description:
-      "Marketing & Expansão: Tecnologia aplicada à aquisição. Ferramentas que ajudam seu negócio a escalar através de dados e automação de vendas.",
+      "Tecnologia que vende por você: SDR de IA que qualifica leads, sistemas de indicação automática e QR codes que rastreiam cada cliente offline.",
     examples: [
       "Automação de SDRs e Qualificação",
       "Dashboards de Atribuição",

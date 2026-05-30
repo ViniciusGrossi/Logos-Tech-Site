@@ -56,7 +56,7 @@ export function Contato() {
           </h2>
 
           <p className="text-base md:text-lg text-neutral-400 max-w-xl mx-auto leading-relaxed font-light mb-12">
-            Descreva seu desafio — nosso Agente de IA está treinado para analisar sua operação e entregar um diagnóstico de viabilidade técnica imediato.
+            Descreva o que trava sua operação — respondemos com um plano concreto de como a tecnologia pode resolver, sem compromisso.
           </p>
         </ScrollReveal>
 
