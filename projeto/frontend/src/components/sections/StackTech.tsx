@@ -69,7 +69,7 @@ export function StackTech() {
             {allTechs.map((tech) => (
               <span
                 key={tech}
-                className="text-2xl md:text-3xl font-light text-neutral-800 hover:text-[var(--lt-orange)] transition-colors duration-300 whitespace-nowrap cursor-default select-none"
+                className="text-2xl md:text-3xl font-light text-neutral-600 hover:text-[var(--lt-orange)] transition-colors duration-300 whitespace-nowrap cursor-default select-none"
               >
                 {tech}
               </span>

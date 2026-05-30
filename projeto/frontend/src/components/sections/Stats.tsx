@@ -4,10 +4,10 @@ import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 const stats = [
-  { value: 4, suffix: "", label: "Módulos Integrados" },
-  { value: 10, suffix: "", label: "Etapas de Workflow" },
-  { value: 2, suffix: "–6 sem", label: "Time to Market" },
-  { value: 500, suffix: "k+", label: "Dados processados/dia" },
+  { value: 80, suffix: "%", label: "Redução em tarefas manuais" },
+  { value: 3, suffix: ".5x", label: "ROI médio por projeto" },
+  { value: 6, suffix: " sem", label: "Da ideia ao deploy" },
+  { value: 24, suffix: "/7", label: "Operação sem pausa" },
 ];
 
 export function Stats() {
@@ -28,13 +28,13 @@ export function Stats() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, i) => (
             <ScrollReveal key={stat.label} delay={i * 100}>
-              <div className="stat-item flex flex-col group cursor-default pb-4">
+              <div className="stat-item flex flex-col group cursor-default pb-4 px-6 py-5 bg-neutral-950/70 backdrop-blur-sm border border-white/5 rounded-lg">
                 <div className="flex items-baseline gap-1 mb-3">
                   <AnimatedCounter
                     target={stat.value}
                     suffix={stat.suffix}
-                    duration={2000 + i * 300}
-                    className="text-4xl md:text-5xl font-light text-white tracking-tighter group-hover:text-[var(--lt-orange)] transition-colors duration-300"
+                    duration={1800 + i * 200}
+                    className="text-4xl md:text-5xl font-light text-white tracking-[-0.04em] group-hover:text-[var(--lt-orange)] transition-colors duration-300 stat-number"
                   />
                 </div>
                 <span className="text-xs font-semibold text-neutral-600 uppercase tracking-widest group-hover:text-white transition-colors duration-300">

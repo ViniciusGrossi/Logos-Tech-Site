@@ -88,10 +88,10 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col gap-1">
             <p className="text-[11px] text-neutral-600 font-mono tracking-wider text-center md:text-left">
-              © {new Date().getFullYear()} LOGOS TECH LANDING_V1.0
+              © {new Date().getFullYear()} Logos Tech. Todos os direitos reservados.
             </p>
-            <p className="text-[9px] text-neutral-800 font-mono uppercase tracking-[0.3em] text-center md:text-left">
-              Codificado para performance extrema
+            <p className="text-[9px] text-neutral-700 font-mono uppercase tracking-[0.3em] text-center md:text-left">
+              Sistemas inteligentes feitos sob medida
             </p>
           </div>
 

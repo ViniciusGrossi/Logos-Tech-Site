@@ -51,10 +51,10 @@ export function SimpleSolutions() {
         </div>
       </ScrollReveal>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 auto-rows-fr">
         {simpleSolutions.map((solution, i) => (
           <ScrollReveal key={i} delay={i * 100}>
-            <div className="p-8 border border-white/5 bg-neutral-900/30 backdrop-blur-md hover:border-[var(--lt-orange)]/20 hover:bg-neutral-900/50 transition-all duration-500 group flex flex-col md:flex-row gap-6 items-start">
+            <div className="h-full p-8 border border-white/8 bg-neutral-900/90 backdrop-blur-sm hover:border-[var(--lt-orange)]/20 hover:bg-neutral-900 transition-all duration-500 group flex flex-col md:flex-row gap-6 items-start">
               <div className="w-14 h-14 shrink-0 rounded-2xl bg-white/5 flex items-center justify-center text-neutral-500 group-hover:text-[var(--lt-orange)] group-hover:bg-[var(--lt-orange)]/10 group-hover:scale-110 transition-all duration-500">
                 {solution.icon}
               </div>

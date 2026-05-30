@@ -13,11 +13,12 @@ export function Hero() {
   useEffect(() => {
     if (!wordsRef.current) return;
     const words = wordsRef.current.querySelectorAll(".word");
-    words.forEach((word) => {
+    words.forEach((word, index) => {
       const el = word as HTMLElement;
-      const delay = parseInt(el.dataset.delay || "0", 10);
+      // Compress stagger: 70ms per word, full reveal in ~900ms
+      const delay = index * 70;
       setTimeout(() => {
-        el.style.animation = "word-appear 0.8s ease-out forwards";
+        el.style.animation = "word-appear 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards";
       }, delay);
     });
   }, []);
@@ -84,7 +85,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="pt-24 relative z-10">
+    <section id="hero" className="pt-24 relative z-10 overflow-hidden">
       <main
         ref={wordsRef}
         className="grid grid-cols-1 lg:grid-cols-12 px-6 lg:px-12 my-12 lg:my-20 gap-12 relative min-h-[70vh] max-w-[90rem] mx-auto items-center"
@@ -94,60 +95,60 @@ export function Hero() {
           {/* Tagline */}
           <div className="text-center lg:text-left mb-8">
             <h2 className="text-xs font-mono font-light uppercase tracking-[0.2em] text-neutral-500">
-              <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="0">
+              <span className="word inline-block opacity-0 mr-[0.3em]">
                 Desenvolvimento
               </span>
-              <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="200">
+              <span className="word inline-block opacity-0 mr-[0.3em]">
                 sob
               </span>
-              <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="400">
+              <span className="word inline-block opacity-0 mr-[0.3em]">
                 medida
               </span>
             </h2>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-[5.5rem] leading-[0.9] text-white font-serif font-bold tracking-tighter mb-8 text-center lg:text-left">
-            <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="600">
+          <h1 className="text-4xl md:text-6xl lg:text-[5.5rem] leading-[0.92] text-white font-serif font-bold tracking-[-0.03em] mb-8 text-center lg:text-left">
+            <span className="word inline-block opacity-0 mr-[0.3em]">
               <GradientText shimmer>Resolvemos</GradientText>
             </span>
-            <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="800">
+            <span className="word inline-block opacity-0 mr-[0.3em]">
               problemas
             </span>
-            <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="1000">
-              latentes
+            <span className="word inline-block opacity-0 mr-[0.3em]">
+              reais
             </span>
             <br className="hidden lg:block" />
-            <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="1200">
+            <span className="word inline-block opacity-0 mr-[0.3em]">
               de
             </span>
-            <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="1400">
+            <span className="word inline-block opacity-0 mr-[0.3em]">
               negócios
             </span>
-            <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="1600">
+            <span className="word inline-block opacity-0 mr-[0.3em]">
               com
             </span>
             <br className="hidden lg:block" />
-            <span className="word inline-block opacity-0 mr-[0.3em]" data-delay="1800">
+            <span className="word inline-block opacity-0 mr-[0.3em]">
               <GradientText shimmer>Inteligência</GradientText>
             </span>
-            <span className="word inline-block opacity-0" data-delay="2000">
+            <span className="word inline-block opacity-0">
               <GradientText shimmer>Artificial.</GradientText>
             </span>
           </h1>
 
           {/* Subtitle */}
           <p
-            className="text-base md:text-lg text-neutral-400 max-w-xl leading-relaxed mb-12 font-light text-center lg:text-left font-sans animate-on-scroll"
-            style={{ animation: "fadeSlideIn 0.8s ease-out 2.6s both" }}
+            className="text-base md:text-lg text-neutral-400 max-w-xl leading-relaxed mb-12 font-light text-center lg:text-left font-sans"
+            style={{ animation: "fadeSlideIn 0.65s cubic-bezier(0.16,1,0.3,1) 1.1s both" }}
           >
             Transforme tarefas manuais em automações que trabalham 24/7. Nosso <span className="text-white font-medium">Agente Especialista</span> está pronto para analisar sua empresa e entregar um diagnóstico gratuito.
           </p>
 
           {/* CTAs */}
           <div
-            className="flex flex-col sm:flex-row items-center lg:items-start gap-4 animate-on-scroll"
-            style={{ animation: "fadeSlideIn 0.8s ease-out 2.8s both" }}
+            className="flex flex-col sm:flex-row items-center lg:items-start gap-4"
+            style={{ animation: "fadeSlideIn 0.65s cubic-bezier(0.16,1,0.3,1) 1.3s both" }}
           >
             {/* Primary: Ver portfólio — Corner Accent */}
             <a
@@ -248,58 +249,58 @@ export function Hero() {
             <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-orange-500/50 translate-x-1 -translate-y-1" />
           </div>
 
-          {/* Left Card (Automation) - Cyan */}
-          <div className="absolute top-[5%] left-[5%] md:left-[0%] lg:-left-[10%] w-40 md:w-48 aspect-square bg-black/80 border border-cyan-500/30 shadow-[0_0_30px_rgba(6,182,212,0.1)] hud-card z-20 transform -rotate-6 rotate-y-[2deg] overflow-hidden rounded-sm backdrop-blur-sm hud-glitch-hover group/cyan">
+          {/* Left Card (Automation) - Orange dim */}
+          <div className="absolute top-[5%] left-[5%] md:left-[0%] lg:-left-[10%] w-40 md:w-48 aspect-square bg-black/80 border border-orange-500/20 shadow-[0_0_30px_rgba(249,115,22,0.08)] hud-card z-20 transform -rotate-6 overflow-hidden rounded-sm backdrop-blur-sm hud-glitch-hover group/left">
             <div className="hud-scanline absolute inset-0" style={{animationDelay: '-1.5s'}} />
-            <div className="w-full h-full bg-grid-cyan flex flex-col p-4 relative z-10">
-              <span className="text-[9px] font-mono text-cyan-400 opacity-80 mb-auto">AUT.WORKFLOWS</span>
-              
+            <div className="w-full h-full bg-grid-orange flex flex-col p-4 relative z-10">
+              <span className="text-[9px] font-mono text-orange-400/70 opacity-80 mb-auto">AUT.WORKFLOWS</span>
+
               <div className="flex justify-center items-center gap-2 md:gap-3 my-auto">
-                <div className="p-2 bg-cyan-950/50 border border-cyan-500/40 rounded flex items-center justify-center group-hover/cyan:bg-cyan-900/50 transition-colors">
-                  <Network className="w-4 h-4 md:w-5 md:h-5 text-cyan-400" />
+                <div className="p-2 bg-orange-950/30 border border-orange-500/30 rounded flex items-center justify-center group-hover/left:bg-orange-900/30 transition-colors">
+                  <Network className="w-4 h-4 md:w-5 md:h-5 text-orange-400/70" />
                 </div>
-                <div className="h-[1px] w-4 bg-cyan-500/50 relative">
-                  <div className="absolute top-0 left-0 h-full w-2 bg-cyan-400 animate-pulse-slow" />
+                <div className="h-[1px] w-4 bg-orange-500/40 relative">
+                  <div className="absolute top-0 left-0 h-full w-2 bg-orange-400/80 animate-pulse-slow" />
                 </div>
-                <div className="p-2 bg-cyan-950/50 border border-cyan-500/40 rounded flex items-center justify-center group-hover/cyan:bg-cyan-900/50 transition-colors">
-                  <span className="text-cyan-400 font-mono text-[10px] md:text-xs font-bold">n8n</span>
+                <div className="p-2 bg-orange-950/30 border border-orange-500/30 rounded flex items-center justify-center group-hover/left:bg-orange-900/30 transition-colors">
+                  <span className="text-orange-400/70 font-mono text-[10px] md:text-xs font-bold">n8n</span>
                 </div>
               </div>
 
               <div className="flex justify-between items-end mt-auto">
-                <span className="text-[9px] md:text-[10px] font-mono text-cyan-500 font-bold group-hover/cyan:text-cyan-300 transition-colors">
+                <span className="text-[9px] md:text-[10px] font-mono text-orange-500/70 font-bold group-hover/left:text-orange-400 transition-colors">
                   [SYNCING]
                 </span>
-                <span className="text-[8px] font-mono text-cyan-400 border border-cyan-500/30 px-1">PYTHON</span>
+                <span className="text-[8px] font-mono text-orange-400/60 border border-orange-500/20 px-1">PYTHON</span>
               </div>
             </div>
           </div>
 
-          {/* Right Card (Data/AI) - Emerald */}
-          <div className="absolute bottom-[2%] right-[5%] md:right-[0%] lg:-right-[5%] w-44 md:w-52 aspect-[4/3] bg-black/80 border border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.1)] hud-card z-10 transform rotate-3 rotate-y-[-2deg] overflow-hidden rounded-sm backdrop-blur-sm hud-glitch-hover group/em">
+          {/* Right Card (Data/AI) - Amber */}
+          <div className="absolute bottom-[2%] right-[5%] md:right-[0%] lg:-right-[5%] w-44 md:w-52 aspect-[4/3] bg-black/80 border border-amber-500/20 shadow-[0_0_30px_rgba(251,191,36,0.08)] hud-card z-10 transform rotate-3 overflow-hidden rounded-sm backdrop-blur-sm hud-glitch-hover group/right">
             <div className="hud-scanline absolute inset-0" style={{animationDelay: '-2s'}} />
-            <div className="w-full h-full bg-grid-emerald flex flex-col p-4 relative z-10">
+            <div className="w-full h-full bg-grid-amber flex flex-col p-4 relative z-10">
               <div className="flex justify-between mb-auto">
-                <span className="text-[9px] font-mono text-emerald-400 opacity-80">DT.INTELLIGENCE</span>
+                <span className="text-[9px] font-mono text-amber-400/70 opacity-80">DT.INTELLIGENCE</span>
                 <div className="flex gap-1 items-end">
-                  <div className="w-1 h-2 bg-emerald-500/30 animate-pulse" />
-                  <div className="w-1 h-3 bg-emerald-500/60 animate-pulse" style={{animationDelay: '100ms'}} />
-                  <div className="w-1 h-4 bg-emerald-500 animate-pulse" style={{animationDelay: '200ms'}} />
-                </div>
-              </div>
-              
-              <div className="text-center my-auto transform group-hover/em:scale-105 transition-transform duration-300">
-                <div className="text-2xl md:text-3xl font-mono text-emerald-400 font-bold tracking-tighter text-emerald-glow">
-                  3.5x
-                </div>
-                <div className="text-[8px] font-mono text-emerald-500/70 mt-1 uppercase tracking-widest">
-                  ROI Tracker
+                  <div className="w-1 h-2 bg-amber-500/30 animate-pulse" />
+                  <div className="w-1 h-3 bg-amber-500/60 animate-pulse" style={{animationDelay: '100ms'}} />
+                  <div className="w-1 h-4 bg-amber-400/80 animate-pulse" style={{animationDelay: '200ms'}} />
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 mt-auto pt-2 border-t border-emerald-500/20">
-                <Bot className="w-3 h-3 text-emerald-500" />
-                <span className="text-[7.5px] font-mono text-emerald-400">Claude · OpenAI</span>
+              <div className="text-center my-auto transform group-hover/right:scale-105 transition-transform duration-300">
+                <div className="text-2xl md:text-3xl font-mono text-amber-400 font-bold tracking-[-0.04em] stat-number" style={{textShadow: '0 0 10px rgba(251,191,36,0.4)'}}>
+                  3.5x
+                </div>
+                <div className="text-[8px] font-mono text-amber-500/60 mt-1 uppercase tracking-widest">
+                  ROI Médio
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 mt-auto pt-2 border-t border-amber-500/15">
+                <Bot className="w-3 h-3 text-amber-500/70" />
+                <span className="text-[7.5px] font-mono text-amber-400/60">Claude · OpenAI</span>
               </div>
             </div>
           </div>

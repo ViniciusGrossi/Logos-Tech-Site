@@ -3,12 +3,13 @@
 import dynamic from "next/dynamic";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
+import { GraphSection } from "@/components/graph/graph-section";
 
 // Dynamic imports for ambient layers (non-blocking)
 const BackgroundGrid = dynamic(() => import("@/components/ui/background-grid").then(m => m.BackgroundGrid), { ssr: false });
 const MouseFollower = dynamic(() => import("@/components/ui/mouse-follower").then(m => m.MouseFollower), { ssr: false });
 const ScrollProgress = dynamic(() => import("@/components/ui/scroll-progress").then(m => m.ScrollProgress), { ssr: false });
-const FloatingParticles = dynamic(() => import("@/components/ui/floating-particles").then(m => m.FloatingParticles), { ssr: false });
+const SiteGraphCanvas = dynamic(() => import("@/components/graph/site-graph-canvas").then(m => m.SiteGraphCanvas), { ssr: false });
 const NoiseOverlay = dynamic(() => import("@/components/ui/noise-overlay").then(m => m.NoiseOverlay), { ssr: false });
 
 // Sections below the fold - dynamic to reduce initial bundle with skeletal placeholders
@@ -46,22 +47,22 @@ export default function Home() {
     <>
       {/* Ambient layers */}
       <BackgroundGrid />
-      <FloatingParticles />
+      <SiteGraphCanvas />
       <MouseFollower />
       <ScrollProgress />
       <NoiseOverlay />
 
-      {/* Content */}
+      {/* Content — each section is a node in the site-wide graph */}
       <Navbar />
-      <Hero />
-      <Stats />
-      <SimpleSolutions />
-      <Servicos />
-      <UseCases />
-      <Portfolio />
-      <Processo />
-      <StackTech />
-      <Contato />
+      <GraphSection id="hero"><Hero /></GraphSection>
+      <GraphSection id="stats"><Stats /></GraphSection>
+      <GraphSection id="simple-solutions"><SimpleSolutions /></GraphSection>
+      <GraphSection id="servicos"><Servicos /></GraphSection>
+      <GraphSection id="use-cases"><UseCases /></GraphSection>
+      <GraphSection id="portfolio"><Portfolio /></GraphSection>
+      <GraphSection id="processo"><Processo /></GraphSection>
+      <GraphSection id="stack"><StackTech /></GraphSection>
+      <GraphSection id="contato"><Contato /></GraphSection>
       <Footer />
       <FloatingWhatsApp />
     </>

@@ -6,12 +6,8 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { TiltCard } from "@/components/ui/tilt-card";
 import { Badge } from "@/components/ui/badge";
 import { projects, PortfolioProject } from "@/data/portfolio";
-import { ExternalLink, Play, X, ArrowRight, CheckCircle2, MessageSquare } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogClose,
-} from "@/components/ui/dialog";
+import { ExternalLink, Play, ArrowRight, CheckCircle2, MessageSquare } from "lucide-react";
+import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
@@ -49,40 +45,113 @@ export function Portfolio() {
         </div>
       </ScrollReveal>
 
-      <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {projects.map((project, i) => (
-            <ScrollReveal key={project.id} delay={i * 150}>
-              <div 
+      {/* Featured project — full-width horizontal layout */}
+        {projects[0] && (
+          <ScrollReveal>
+            <div
+              className="cursor-pointer mb-6"
+              onClick={() => setSelectedProject(projects[0])}
+            >
+              <div className="group border border-white/5 bg-[var(--lt-surface)] hover:border-[var(--lt-border-hover)] transition-all duration-500 overflow-hidden grid grid-cols-1 lg:grid-cols-2 relative">
+                {/* Left: Image */}
+                <div className="aspect-video lg:aspect-auto min-h-[260px] bg-neutral-900 relative overflow-hidden">
+                  <Image
+                    src={projects[0].image}
+                    alt={projects[0].title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover opacity-50 group-hover:opacity-75 group-hover:scale-[1.03] transition-all duration-700"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[var(--lt-surface)] opacity-60 hidden lg:block" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--lt-surface)] via-transparent to-transparent lg:hidden" />
+
+                  {/* Sector badge */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <div className="px-2 py-0.5 bg-black/60 backdrop-blur-md border border-white/10 flex items-center gap-2">
+                      <div className="w-1 h-1 rounded-full bg-[var(--lt-orange)] shadow-[0_0_5px_var(--lt-orange)]" />
+                      <span className="text-[9px] font-mono text-neutral-300 uppercase tracking-wider">{projects[0].sector}</span>
+                    </div>
+                  </div>
+
+                  {/* Play/view button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0 flex flex-col items-center gap-2">
+                      <div className="w-14 h-14 rounded-full bg-[var(--lt-orange)] flex items-center justify-center shadow-[0_0_30px_rgba(249,115,22,0.5)]">
+                        {projects[0].videoUrl
+                          ? <Play className="w-6 h-6 text-black fill-current ml-1" />
+                          : <ExternalLink className="w-6 h-6 text-black" />}
+                      </div>
+                      <span className="text-[10px] text-white font-mono uppercase tracking-[0.2em] font-bold">
+                        {projects[0].videoUrl ? "Ver Demonstração" : "Ver Case Study"}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right: Content */}
+                <div className="p-8 lg:p-12 flex flex-col justify-center relative">
+                  <span className="text-[9px] font-mono text-[var(--lt-orange)] uppercase tracking-widest mb-4 block">
+                    Destaque
+                  </span>
+                  <h3 className="text-2xl lg:text-3xl text-white font-medium mb-4 group-hover:text-[var(--lt-orange)] transition-colors duration-300 leading-tight">
+                    {projects[0].title}
+                  </h3>
+                  <p className="text-sm text-neutral-400 leading-relaxed mb-6 max-w-md">
+                    {projects[0].description}
+                  </p>
+                  {projects[0].results && projects[0].results.length > 0 && (
+                    <div className="mb-6 flex items-start gap-3 bg-[var(--lt-orange)]/5 p-3 border border-[var(--lt-orange)]/10">
+                      <CheckCircle2 className="w-4 h-4 text-[var(--lt-orange)] shrink-0 mt-0.5" />
+                      <span className="text-sm text-neutral-300 font-medium leading-snug">
+                        {projects[0].results[0]}
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex flex-wrap gap-2">
+                    {projects[0].tags.map((tech, j) => (
+                      <Badge
+                        key={tech}
+                        variant="outline"
+                        className="text-[10px] text-neutral-500 border-white/10 bg-white/5 hover:text-[var(--lt-orange)] hover:border-[var(--lt-orange)]/20 hover:bg-[var(--lt-orange)]/5 transition-all duration-300 cursor-default"
+                        style={{ transitionDelay: `${j * 30}ms` }}
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        )}
+
+        {/* Remaining projects — 3-column grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.slice(1).map((project, i) => (
+            <ScrollReveal key={project.id} delay={i * 120}>
+              <div
                 className="cursor-pointer h-full"
                 onClick={() => setSelectedProject(project)}
               >
                 <TiltCard intensity={8}>
                   <div className="group border border-white/5 bg-[var(--lt-surface)] hover:border-[var(--lt-border-hover)] transition-all duration-500 flex flex-col h-full overflow-hidden relative">
-                    {/* Visual Media Container */}
+                    {/* Visual */}
                     <div className="aspect-video bg-neutral-900 relative overflow-hidden">
-                      {/* Actual Project Image */}
-                      <Image 
-                        src={project.image} 
+                      <Image
+                        src={project.image}
                         alt={project.title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700"
+                        className="object-cover opacity-45 group-hover:opacity-72 group-hover:scale-105 transition-all duration-700"
                       />
-                      
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-80" />
-
-                      {/* Animated scan line */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--lt-surface)] via-transparent to-transparent opacity-80" />
                       <div className="absolute inset-0 overflow-hidden pointer-events-none">
                         <div
                           className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--lt-orange)]/40 to-transparent opacity-0 group-hover:opacity-100"
-                          style={{
-                            animation: "beam-drop 3s cubic-bezier(0.4,0,0.2,1) infinite",
-                          }}
+                          style={{ animation: "beam-drop 3s cubic-bezier(0.4,0,0.2,1) infinite" }}
                         />
                       </div>
-
-                      {/* Interaction Overlay */}
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 flex items-center justify-center">
                         <div className="flex flex-col items-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
                           {project.videoUrl ? (
@@ -99,10 +168,8 @@ export function Portfolio() {
                           </span>
                         </div>
                       </div>
-
-                      {/* Sector Badge Floating */}
                       <div className="absolute top-4 left-4 z-10">
-                        <div className="px-2 py-0.5 rounded-sm bg-black/60 backdrop-blur-md border border-white/10 flex items-center gap-2">
+                        <div className="px-2 py-0.5 bg-black/60 backdrop-blur-md border border-white/10 flex items-center gap-2">
                           <div className="w-1 h-1 rounded-full bg-[var(--lt-orange)] shadow-[0_0_5px_var(--lt-orange)]" />
                           <span className="text-[9px] font-mono text-neutral-300 uppercase tracking-wider">{project.sector}</span>
                         </div>
@@ -114,21 +181,17 @@ export function Portfolio() {
                       <h3 className="text-lg text-white font-medium mb-3 group-hover:text-[var(--lt-orange)] transition-colors duration-300">
                         {project.title}
                       </h3>
-
                       <p className="text-sm text-neutral-400 leading-relaxed mb-4">
                         {project.description}
                       </p>
-
                       {project.results && project.results.length > 0 && (
-                        <div className="mb-6 flex items-start gap-2 bg-[var(--lt-orange)]/5 p-2 rounded-sm border border-[var(--lt-orange)]/10">
+                        <div className="mb-6 flex items-start gap-2 bg-[var(--lt-orange)]/5 p-2 border border-[var(--lt-orange)]/10">
                           <CheckCircle2 className="w-3.5 h-3.5 text-[var(--lt-orange)] shrink-0 mt-0.5" />
                           <span className="text-xs text-neutral-300 font-medium leading-snug">
                             {project.results[0]}
                           </span>
                         </div>
                       )}
-
-                      {/* Tags chips with staggered hover */}
                       <div className="flex flex-wrap gap-2 mt-auto">
                         {project.tags.map((tech, j) => (
                           <Badge
@@ -149,12 +212,13 @@ export function Portfolio() {
           ))}
         </div>
 
-        {/* Plan A Immersive Case Study Modal */}
+      <Modal
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+        showCloseButton={true}
+      >
         {selectedProject && (
-          <DialogContent 
-            showCloseButton={false} 
-            className="w-[95vw] sm:max-w-4xl bg-[#0F0F0F] border-white/10 p-0 overflow-hidden max-h-[92vh] !flex flex-col rounded-none md:rounded-sm z-[150] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
-          >
+          <>
             <div className="relative overflow-y-auto custom-scrollbar flex-1">
               {/* Header with Visual */}
               <div className="relative h-56 md:h-80 w-full overflow-hidden shrink-0">
@@ -178,10 +242,6 @@ export function Portfolio() {
                      {selectedProject.title}
                    </h2>
                 </div>
-
-                <DialogClose className="absolute top-4 right-4 md:top-8 md:right-8 w-11 h-11 md:w-12 md:h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-[var(--lt-orange)]/50 transition-all z-20">
-                  <X className="w-5 h-5 md:w-6 md:h-6" />
-                </DialogClose>
               </div>
 
               <div className="p-5 md:p-12">
@@ -263,16 +323,16 @@ export function Portfolio() {
 
                   <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
                     {selectedProject.link && selectedProject.link.startsWith('http') && (
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         className="w-full sm:w-auto bg-transparent border-white/10 text-white hover:bg-white/5 hover:border-white/30 transition-all text-xs h-11 px-6 rounded-none backdrop-blur-sm"
                         onClick={() => window.open(selectedProject.link, '_blank')}
                       >
                          Live Demo <ArrowRight className="ml-2 w-4 h-4 opacity-70" />
                       </Button>
                     )}
-                    
-                    <Button 
+
+                    <Button
                       className="w-full sm:w-auto bg-[var(--lt-orange)] text-black hover:bg-[var(--lt-orange-hover)] shadow-[0_0_20px_rgba(249,115,22,0.2)] group h-11 px-8 rounded-none font-semibold uppercase tracking-wider text-xs"
                       onClick={() => handleOpenWhatsApp(selectedProject)}
                     >
@@ -282,9 +342,9 @@ export function Portfolio() {
                 </div>
               </div>
             </div>
-          </DialogContent>
+          </>
         )}
-      </Dialog>
+      </Modal>
 
       {/* Section divider */}
       <div className="section-divider mt-24" />

@@ -41,10 +41,10 @@ export function UseCases() {
         </div>
       </ScrollReveal>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 auto-rows-fr">
         {scenarios.map((scenario, i) => (
           <ScrollReveal key={i} delay={i * 200}>
-            <div className="p-8 border border-white/5 bg-neutral-950/50 backdrop-blur-sm group hover:border-[var(--lt-orange)]/20 transition-all duration-500 relative overflow-hidden">
+            <div className="h-full p-8 border border-white/8 bg-neutral-950/90 backdrop-blur-sm group hover:border-[var(--lt-orange)]/20 transition-all duration-500 relative overflow-hidden">
                {/* Background highlight icon */}
                <div className="absolute top-4 right-4 text-white/5 group-hover:text-[var(--lt-orange)]/10 transition-colors duration-500 scale-150 rotate-12">
                 {scenario.icon}
@@ -67,8 +67,8 @@ export function UseCases() {
                 </p>
 
                 <div className="pt-4 flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-green-500/60" />
-                  <span className="text-xs font-semibold text-green-400/80 uppercase tracking-wider">{scenario.impact}</span>
+                  <CheckCircle2 className="w-4 h-4 text-[var(--lt-orange)]/70" />
+                  <span className="text-xs font-semibold text-[var(--lt-orange)]/80 uppercase tracking-wider">{scenario.impact}</span>
                 </div>
               </div>
             </div>
