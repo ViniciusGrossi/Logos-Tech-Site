@@ -54,7 +54,7 @@ const AMBER = "251, 191, 36";
 
 export function SiteGraphCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const canvas = canvasRef.current;
