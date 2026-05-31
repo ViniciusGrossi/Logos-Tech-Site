@@ -7,20 +7,20 @@ const testimonials = [
   {
     quote:
       "Em menos de um mês o agente já atendia no WhatsApp por conta própria. Reduzimos em mais de 70% as mensagens fora do horário que chegavam para a equipe.",
-    role: "Gestor Comercial",
-    company: "Distribuidora · Brasília, DF",
+    role: "Rafael M.",
+    company: "Brasília, DF",
   },
   {
     quote:
       "Nunca imaginei que automatizar triagem de clientes fosse tão direto. O agente qualifica, agenda e registra tudo — sem eu precisar tocar em nada.",
-    role: "Sócia-Fundadora",
-    company: "Clínica de Saúde · São Paulo, SP",
+    role: "Camila T.",
+    company: "Brasília, DF",
   },
   {
     quote:
       "Saímos de planilhas bagunçadas para um dashboard que qualquer pessoa da equipe usa no dia a dia. O impacto na velocidade de decisão foi imediato.",
-    role: "Diretor de Operações",
-    company: "Rede de Franquias · Rio de Janeiro, RJ",
+    role: "André L.",
+    company: "Brasília, DF",
   },
 ];
 
