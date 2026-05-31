@@ -28,6 +28,9 @@ const UseCases = dynamic(() => import("@/components/sections/UseCases").then(m =
 const Portfolio = dynamic(() => import("@/components/sections/Portfolio").then(m => m.Portfolio), {
   loading: () => <div className="h-[800px] w-full bg-neutral-900/10" />
 });
+const Testimonials = dynamic(() => import("@/components/sections/Testimonials").then(m => m.Testimonials), {
+  loading: () => <div className="h-80 w-full bg-neutral-900/10" />
+});
 const Processo = dynamic(() => import("@/components/sections/Processo").then(m => m.Processo), {
   loading: () => <div className="h-96 w-full bg-neutral-900/10" />
 });
@@ -60,6 +63,7 @@ export default function Home() {
       <GraphSection id="servicos"><Servicos /></GraphSection>
       <GraphSection id="use-cases"><UseCases /></GraphSection>
       <GraphSection id="portfolio"><Portfolio /></GraphSection>
+      <GraphSection id="testimonials"><Testimonials /></GraphSection>
       <GraphSection id="processo"><Processo /></GraphSection>
       <GraphSection id="stack"><StackTech /></GraphSection>
       <GraphSection id="contato"><Contato /></GraphSection>

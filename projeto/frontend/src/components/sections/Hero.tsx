@@ -130,7 +130,7 @@ export function Hero() {
             </span>
             <br className="hidden lg:block" />
             <span className="word inline-block opacity-0 mr-[0.3em]">
-              <GradientText shimmer>manual.</GradientText>
+              <GradientText shimmer>manual?</GradientText>
             </span>
             <span className="word inline-block opacity-0">
               A gente resolve.
